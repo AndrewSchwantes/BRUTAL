@@ -52,30 +52,31 @@ Each top-level folder in this repository is one library, published as a NuGet pa
 
 | Library | What it is |
 | --- | --- |
-| `brutal.core` | Base types, attributes, platform detection, pointer helpers, Roslyn analyzers |
-| `brutal.interop` | The custom interop layer that gives C# direct access to native APIs |
-| `brutal.memory` | Unmanaged memory management and allocators |
-| `brutal.collections` | Collections that don't allocate |
-| `brutal.strings` | String building and handling without allocation |
-| `brutal.maths`, `brutal.numerics` | Vector, matrix and numeric types |
-| `brutal.concurrency` | Job system and threading |
-| `brutal.logging` | Logging |
-| `brutal.localization` | Localization |
-| `brutal.vulkan` | Vulkan bindings, abstractions and the Vulkan Memory Allocator |
-| `brutal.opengl` | OpenGL bindings |
-| `brutal.glfw`, `brutal.sdl` | Windowing and input |
-| `brutal.imgui` | Dear ImGui and ImPlot bindings, docking branch |
-| `brutal.render` | Mesh utilities |
-| `brutal.texture`, `brutal.ktx`, `brutal.gli`, `brutal.stb` | Texture loading, KTX and compressed formats, image decoding |
-| `brutal.gltf`, `brutal.meshoptimizer` | glTF loading and mesh optimisation |
-| `brutal.freetype` | Font rasterisation |
-| `brutal.fmod`, `brutal.openal` | Audio |
-| `brutal.raknet` | Networking |
-| `brutal.jolt`, `brutal.box2d` | 3D and 2D physics |
-| `brutal.monitor`, `brutal.renderdoc` | Runtime monitoring and RenderDoc capture integration |
-| `brutal.nativefiledialog`, `brutal.notcurses`, `brutal.zlib` | Native file dialogs, terminal UI, compression |
+| `Brutal.Core` | Base types, attributes, platform detection, pointer helpers, Roslyn analyzers |
+| `Brutal.Interop` | The custom interop layer that gives C# direct access to native APIs |
+| `Brutal.Memory` | Unmanaged memory management and allocators |
+| `Brutal.Collections` | Collections that don't allocate |
+| `Brutal.Strings` | String building and handling without allocation |
+| `Brutal.Maths`, `Brutal.Numerics` | Vector, matrix and numeric types |
+| `Brutal.Concurrency` | Job system and threading |
+| `Brutal.Logging` | Logging |
+| `Brutal.Localization` | Localization |
+| `Brutal.Vulkan`, `Brutal.Vulkan.Abstractions`, `Brutal.Vulkan.Vma` | Vulkan bindings, abstractions and the Vulkan Memory Allocator |
+| `Brutal.OpenGl` | OpenGL bindings |
+| `Brutal.ShaderC`, `Brutal.Slang` | Shader compilation |
+| `Brutal.Glfw`, `Brutal.Sdl`, `Brutal.Sdl.Image`, `Brutal.Sdl.Mixer`, `Brutal.Sdl.Ttf` | Windowing and input, with SDL's image, audio mixing and font add-ons |
+| `Brutal.ImGui`, `Brutal.ImGui.*`, `Brutal.ImPlot` | Dear ImGui and ImPlot bindings, docking branch |
+| `Brutal.Render.Mesh` | Mesh utilities |
+| `Brutal.Texture`, `Brutal.Texture.Abstractions`, `Brutal.Ktx`, `Brutal.Gli`, `Brutal.Stb` | Texture loading, KTX and compressed formats, image decoding |
+| `Brutal.Gltf`, `Brutal.MeshOptimizer` | glTF loading and mesh optimisation |
+| `Brutal.FreeType` | Font rasterisation |
+| `Brutal.Fmod`, `Brutal.OpenAl` | Audio |
+| `Brutal.RakNet` | Networking |
+| `Brutal.Jolt`, `Brutal.Box2D` | 3D and 2D physics |
+| `Brutal.Monitor.Common`, `Brutal.Monitor.Host`, `Brutal.RenderDoc`, `Brutal.RenderDoc.ImGui` | Runtime monitoring and RenderDoc capture integration |
+| `Brutal.NativeFileDialog`, `Brutal.NotCurses`, `Brutal.ZLib` | Native file dialogs, terminal UI, compression |
 
-Third-party notices for each binding live in that library's `LICENSES` folder.
+Third-party notices for each library live in its `LICENSES` folder, `Brutal.ImGui/LICENSES` say.
 
 ## Getting started
 
@@ -152,7 +153,9 @@ The licence is based on MIT with an added attribution requirement. A game or pro
 
 If you don't want to do that, we can arrange a separate commercial licence. We also waive the logo requirement for non-profit projects and where displaying it would be detrimental to the application's purpose.
 
-BRUTAL is open source. There are already OSI-approved licences that allow graphical attribution. Ours is not yet OSI approved because we have not submitted it yet. We intend to, and to develop the licence with community feedback. See [LICENSE](LICENSE) for the full text.
+BRUTAL is open source. There are already OSI-approved licences that allow graphical attribution. Ours is not yet OSI approved because we have not submitted it yet. We intend to, and to develop the licence with community feedback. See [LICENSE.txt](LICENSE.txt) for the full text.
+
+Third-party components keep their own licences. Section 4.0 points at the `LICENSES` folder at the root of each NuGet package; in this repository, those notices are in the `LICENSES` folder of each library that redistributes them.
 
 ## Contributing
 

@@ -65,7 +65,7 @@ You don't need to contribute to use BRUTAL. It's free, including for commercial 
 - **2.2:** the BRUTAL logo from [ahwoo.com/brutal-branding](https://ahwoo.com/brutal-branding) shown before gameplay starts
 - **2.3:** `NOTICE.txt` shipped alongside your game
 
-For a logo waiver (for example non-profit projects, or where the logo would get in the way of the product's purpose) or a separate commercial licence, contact Ahwoo at **[CONTACT ADDRESS]**.
+For a logo waiver (for example non-profit projects, or where the logo would get in the way of the product's purpose) or a separate commercial licence, contact Ahwoo at **brutal@ahwoo.com**.
 
 ## Code of Conduct
 
