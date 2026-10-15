@@ -45,7 +45,7 @@ Agentic tools can make you very productive. They also make it easy to submit lar
 
 ## Licensing of contributions
 
-BRUTAL is distributed under the [BRUTAL License](LICENSE). **Section 5.0 of the licence covers contributions.** By submitting a contribution you grant Ahwoo Limited and all recipients of BRUTAL a perpetual, worldwide, non-exclusive, royalty-free, irrevocable licence to include it in BRUTAL and use it under the licence's terms. You also confirm that you're legally entitled to grant that licence and that your contribution doesn't infringe anyone else's rights. Please read section 5.0 before opening a PR.
+BRUTAL is distributed under the [BRUTAL License](LICENSE.txt). **Section 5.0 of the licence covers contributions.** By submitting a contribution you grant Ahwoo Limited and all recipients of BRUTAL a perpetual, worldwide, non-exclusive, royalty-free, irrevocable licence to include it in BRUTAL and use it under the licence's terms. You also confirm that you're legally entitled to grant that licence and that your contribution doesn't infringe anyone else's rights. Please read section 5.0 before opening a PR.
 
 Third-party components that BRUTAL redistributes keep their own licences, listed in the `LICENSES/` directory (section 4.0). Don't add third-party code without discussing it in an issue first.
 
