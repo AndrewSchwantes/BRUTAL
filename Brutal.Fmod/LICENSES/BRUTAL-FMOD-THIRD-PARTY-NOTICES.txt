@@ -1,0 +1,8 @@
+FMOD is a trademark of Firelight Technologies Pty Ltd. The FMOD Engine, its API
+and its documentation are Copyright (c) Firelight Technologies Pty Ltd. This
+package contains C# bindings generated from the FMOD Engine headers and API
+documentation. It is not affiliated with or endorsed by Firelight Technologies.
+
+Use of FMOD is subject to the FMOD End User Licence Agreement. Commercial use
+may require a separate license from Firelight Technologies; see
+https://www.fmod.com/licensing.

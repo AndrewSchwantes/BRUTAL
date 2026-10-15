@@ -1,0 +1,1 @@
+﻿namespace Brutal.SlangApi { }
