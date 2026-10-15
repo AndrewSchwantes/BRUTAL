@@ -7,7 +7,7 @@ BRUTAL follows the [Contributor Covenant, version 2.1](https://www.contributor-c
 - Be respectful. Criticise code and decisions, not people.
 - **Don't direct abuse at maintainers or staff.** Disagreement is fine, but harassment isn't, and it will get you removed even if your technical point is correct.
 - No harassment, hate speech, sexual content, doxxing, threats, scams, malware or spam.
-- Stay on topic. GitHub issues and PRs are for BRUTAL development. Use the [forums](https://forums.ahwoo.dev/forums/brutal/) for everything else.
+- Stay on topic. GitHub issues and PRs are for BRUTAL development. Use the [forums](https://forums.ahwoo.com/forums/brutal/) for everything else.
 
 ## Scope
 

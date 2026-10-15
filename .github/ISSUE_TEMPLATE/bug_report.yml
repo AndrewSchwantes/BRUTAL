@@ -4,7 +4,7 @@ labels: [bug, needs-triage]
 body:
   - type: markdown
     attributes:
-      value: "Questions belong on the [forums](https://forums.ahwoo.dev/forums/brutal/). Security issues: see SECURITY.md."
+      value: "Questions belong on the [forums](https://forums.ahwoo.com/forums/brutal/). Security issues: see SECURITY.md."
   - type: input
     id: packages
     attributes:

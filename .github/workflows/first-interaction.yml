@@ -21,7 +21,7 @@ jobs:
             Thanks for opening your first BRUTAL issue! 👋
 
             We're a small team, so please be patient with us. It may be a while before someone replies. To help us:
-            - **Questions and "how do I…?"** belong on the [BRUTAL forums](https://forums.ahwoo.dev/forums/brutal/). We may close and redirect them.
+            - **Questions and "how do I…?"** belong on the [BRUTAL forums](https://forums.ahwoo.com/forums/brutal/). We may close and redirect them.
             - **Bugs:** please make sure you've included package versions, OS/GPU, and a minimal repro.
             - **Security issues:** please don't post them here. See [SECURITY.md](../blob/main/SECURITY.md).
           pr-message: |
