@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Sdl.Mixer
+Ahwoo.BRUTAL.Sdl.Mixer
 
 This package redistributes third-party software. The licenses governing that software
 are reproduced below in full.
@@ -20,7 +20,7 @@ WHAT THIS PACKAGE CONTAINS
 
 A NOTE ON SCOPE
 
-  This package depends on RocketWerkz.Brutal.Sdl and links against SDL3 at runtime.
+  This package depends on Ahwoo.BRUTAL.Sdl and links against SDL3 at runtime.
   SDL3 is not contained in this package and is covered by that package's own notices.
 
   SDL_mixer can optionally be built against libmpg123, libFLAC, libvorbis, libopus,

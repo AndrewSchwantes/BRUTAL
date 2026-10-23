@@ -16,19 +16,7 @@ public partial class Vulkan
     static Vulkan()
     {
         // Load the correct Vulkan library for the platform
-
-        if (OperatingSystem.IsWindows())
-            Dll = NativeLibrary.Load("vulkan-1", typeof(Vulkan).Assembly, DllImportSearchPath.System32);
-
-        // TODO: This is a hack which only works if SDK is installed, we need to package the Vulkan binary on macOS
-        if (OperatingSystem.IsMacOS())
-            Dll = NativeLibrary.Load("VulkanEx", typeof(Vulkan).Assembly, DllImportSearchPath.LegacyBehavior);
-
-        if (OperatingSystem.IsLinux())
-            Dll = NativeLibrary.Load("vulkan", typeof(Vulkan).Assembly, DllImportSearchPath.LegacyBehavior);
-
-        if (Dll == nint.Zero)
-            throw new NullReferenceException("Failed to load Vulkan library");
+        Dll = LoadVulkanLibrary();
 
         // Assign the native library to the assembly resolver
         NativeLibrary.SetDllImportResolver(
@@ -46,5 +34,38 @@ public partial class Vulkan
             if (GetInstanceProcAddr.Invoke == null)
                 throw new NullReferenceException("Failed to load vkGetInstanceProcAddr from Vulkan library");
         }
+    }
+
+    private static nint LoadVulkanLibrary()
+    {
+        var assembly = typeof(Vulkan).Assembly;
+
+        if (OperatingSystem.IsWindows())
+            return NativeLibrary.Load("vulkan-1", assembly, DllImportSearchPath.System32);
+
+        // Prefer the system Vulkan loader, falling back to the old names
+        string[] candidates = [];
+
+        // TODO: Package the Vulkan loader on macOS so it works without Homebrew or the SDK installed
+        if (OperatingSystem.IsMacOS())
+            candidates =
+            [
+                "libvulkan.1.dylib",
+                "/opt/homebrew/lib/libvulkan.1.dylib",
+                "/usr/local/lib/libvulkan.1.dylib",
+                "VulkanEx",
+            ];
+
+        // libvulkan.so (what "vulkan" resolves to) only ships in -dev packages
+        if (OperatingSystem.IsLinux())
+            candidates = ["libvulkan.so.1", "vulkan"];
+
+        foreach (var candidate in candidates)
+        {
+            if (NativeLibrary.TryLoad(candidate, assembly, DllImportSearchPath.LegacyBehavior, out var dll))
+                return dll;
+        }
+
+        throw new DllNotFoundException($"Failed to load Vulkan library, tried: {string.Join(", ", candidates)}");
     }
 }

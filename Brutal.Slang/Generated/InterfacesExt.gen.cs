@@ -6,17 +6,6 @@ using Brutal.Strings;
 
 namespace Brutal.SlangApi;
 
-public static unsafe partial class ISlangUnknownExtensions
-{
-    public static void* QueryInterface(this ISlangUnknown self, ref Brutal.SlangApi.Uuid uuid)
-    {
-        self.QueryInterface(ref uuid, out var __result).ThrowIfFailure();
-        return __result;
-    }
-    public static Result TryQueryInterface(this ISlangUnknown self, ref Brutal.SlangApi.Uuid uuid, out void* outObject)
-        => self.QueryInterface(ref uuid, out outObject);
-}
-
 public static unsafe partial class ISlangFileSystemExtensions
 {
     public static ISlangBlob LoadFile(this ISlangFileSystem self, byte* path)
@@ -75,7 +64,7 @@ public static unsafe partial class ISlangFileSystemExtExtensions
 
 public static unsafe partial class ISlangMutableFileSystemExtensions
 {
-    public static Result TrySaveFile(this ISlangMutableFileSystem self, byte* path, void* data, ByteSize64 size)
+    public static Result TrySaveFile(this ISlangMutableFileSystem self, byte* path, void* data, ByteSize size)
         => self.SaveFile(path, data, size);
     public static Result TrySaveFileBlob(this ISlangMutableFileSystem self, byte* path, ISlangBlob dataBlob)
         => self.SaveFileBlob(path, dataBlob);
@@ -87,9 +76,9 @@ public static unsafe partial class ISlangMutableFileSystemExtensions
 
 public static unsafe partial class ISlangWriterExtensions
 {
-    public static Result TryEndAppendBuffer(this ISlangWriter self, byte* buffer, ByteSize64 numChars)
+    public static Result TryEndAppendBuffer(this ISlangWriter self, byte* buffer, ByteSize numChars)
         => self.EndAppendBuffer(buffer, numChars);
-    public static Result TryWrite(this ISlangWriter self, byte* chars, ByteSize64 numChars)
+    public static Result TryWrite(this ISlangWriter self, byte* chars, ByteSize numChars)
         => self.Write(chars, numChars);
     public static Result TrySetMode(this ISlangWriter self, Brutal.SlangApi.WriterMode mode)
         => self.SetMode(mode);
@@ -119,7 +108,7 @@ public static unsafe partial class IGlobalSessionExtensions
         => self.CheckPassThroughSupport(passThrough);
     public static Result TryCompileCoreModule(this IGlobalSession self, CompileCoreModuleFlags flags)
         => self.CompileCoreModule(flags);
-    public static Result TryLoadCoreModule(this IGlobalSession self, void* coreModule, ByteSize64 coreModuleSizeInBytes)
+    public static Result TryLoadCoreModule(this IGlobalSession self, void* coreModule, ByteSize coreModuleSizeInBytes)
         => self.LoadCoreModule(coreModule, coreModuleSizeInBytes);
     public static ISlangBlob SaveCoreModule(this IGlobalSession self, Brutal.SlangApi.ArchiveType archiveType)
     {
@@ -130,9 +119,9 @@ public static unsafe partial class IGlobalSessionExtensions
         => self.SaveCoreModule(archiveType, out outBlob);
     public static Result TrySetSpirvCoreGrammar(this IGlobalSession self, byte* jsonPath)
         => self.SetSpirvCoreGrammar(jsonPath);
-    public static ISlangUnknown ParseCommandLineArguments(this IGlobalSession self, int argc, byte** argv, out Brutal.SlangApi.SessionDesc outSessionDesc)
+    public static Brutal.SlangApi.SessionDesc ParseCommandLineArguments(this IGlobalSession self, int argc, byte** argv, out ISlangUnknown outAuxAllocation)
     {
-        self.ParseCommandLineArguments(argc, argv, out outSessionDesc, out var __result).ThrowIfFailure();
+        self.ParseCommandLineArguments(argc, argv, out var __result, out outAuxAllocation).ThrowIfFailure();
         return __result;
     }
     public static Result TryParseCommandLineArguments(this IGlobalSession self, int argc, byte** argv, out Brutal.SlangApi.SessionDesc outSessionDesc, out ISlangUnknown outAuxAllocation)
@@ -146,7 +135,7 @@ public static unsafe partial class IGlobalSessionExtensions
         => self.GetSessionDescDigest(in sessionDesc, out outBlob);
     public static Result TryCompileBuiltinModule(this IGlobalSession self, Brutal.SlangApi.BuiltinModuleName module, CompileCoreModuleFlags flags)
         => self.CompileBuiltinModule(module, flags);
-    public static Result TryLoadBuiltinModule(this IGlobalSession self, Brutal.SlangApi.BuiltinModuleName module, void* moduleData, ByteSize64 sizeInBytes)
+    public static Result TryLoadBuiltinModule(this IGlobalSession self, Brutal.SlangApi.BuiltinModuleName module, void* moduleData, ByteSize sizeInBytes)
         => self.LoadBuiltinModule(module, moduleData, sizeInBytes);
     public static ISlangBlob SaveBuiltinModule(this IGlobalSession self, Brutal.SlangApi.BuiltinModuleName module, Brutal.SlangApi.ArchiveType archiveType)
     {
@@ -187,15 +176,15 @@ public static unsafe partial class ISessionExtensions
     }
     public static Result TryCreateCompileRequest(this ISession self, out CompileRequest outCompileRequest)
         => self.CreateCompileRequest(out outCompileRequest);
-    public static ISlangBlob CreateTypeConformanceComponentType(this ISession self, Brutal.SlangApi.TypeReflection type, Brutal.SlangApi.TypeReflection interfaceType, out Brutal.SlangApi.ITypeConformance outConformance, Int conformanceIdOverride)
+    public static Brutal.SlangApi.ITypeConformance CreateTypeConformanceComponentType(this ISession self, Brutal.SlangApi.TypeReflection type, Brutal.SlangApi.TypeReflection interfaceType, Int conformanceIdOverride, out ISlangBlob outDiagnostics)
     {
-        self.CreateTypeConformanceComponentType(type, interfaceType, out outConformance, conformanceIdOverride, out var __result).ThrowIfFailure();
+        self.CreateTypeConformanceComponentType(type, interfaceType, out var __result, conformanceIdOverride, out outDiagnostics).ThrowIfFailure();
         return __result;
     }
     public static Result TryCreateTypeConformanceComponentType(this ISession self, Brutal.SlangApi.TypeReflection type, Brutal.SlangApi.TypeReflection interfaceType, out Brutal.SlangApi.ITypeConformance outConformance, Int conformanceIdOverride, out ISlangBlob outDiagnostics)
         => self.CreateTypeConformanceComponentType(type, interfaceType, out outConformance, conformanceIdOverride, out outDiagnostics);
-    public static Result TryGetDynamicObjectRTTIBytes(this ISession self, Brutal.SlangApi.TypeReflection type, Brutal.SlangApi.TypeReflection interfaceType, out uint outRTTIDataBuffer, uint bufferSizeInBytes)
-        => self.GetDynamicObjectRTTIBytes(type, interfaceType, out outRTTIDataBuffer, bufferSizeInBytes);
+    public static Result TryGetDynamicObjectRTTIBytes(this ISession self, Brutal.SlangApi.TypeReflection type, Brutal.SlangApi.TypeReflection interfaceType, uint* outRTTIDataBuffer, uint bufferSizeInBytes)
+        => self.GetDynamicObjectRTTIBytes(type, interfaceType, outRTTIDataBuffer, bufferSizeInBytes);
     public static Result TryLoadModuleInfoFromIRBlob(this ISession self, IBlob source, ref Int outModuleVersion, ref byte* outModuleCompilerVersion, ref byte* outModuleName)
         => self.LoadModuleInfoFromIRBlob(source, ref outModuleVersion, ref outModuleCompilerVersion, ref outModuleName);
     public static Brutal.SlangApi.SourceLocation GetDeclSourceLocation(this ISession self, Brutal.SlangApi.DeclReflection decl)
@@ -251,9 +240,9 @@ public static unsafe partial class IComponentTypeExtensions
     }
     public static Result TryRenameEntryPoint(this IComponentType self, byte* newName, out Brutal.SlangApi.IComponentType outEntryPoint)
         => self.RenameEntryPoint(newName, out outEntryPoint);
-    public static ISlangBlob LinkWithOptions(this IComponentType self, out Brutal.SlangApi.IComponentType outLinkedComponentType, uint compilerOptionEntryCount, in Brutal.SlangApi.CompilerOptionEntry compilerOptionEntries)
+    public static Brutal.SlangApi.IComponentType LinkWithOptions(this IComponentType self, uint compilerOptionEntryCount, in Brutal.SlangApi.CompilerOptionEntry compilerOptionEntries, out ISlangBlob outDiagnostics)
     {
-        self.LinkWithOptions(out outLinkedComponentType, compilerOptionEntryCount, in compilerOptionEntries, out var __result).ThrowIfFailure();
+        self.LinkWithOptions(out var __result, compilerOptionEntryCount, in compilerOptionEntries, out outDiagnostics).ThrowIfFailure();
         return __result;
     }
     public static Result TryLinkWithOptions(this IComponentType self, out Brutal.SlangApi.IComponentType outLinkedComponentType, uint compilerOptionEntryCount, in Brutal.SlangApi.CompilerOptionEntry compilerOptionEntries, out ISlangBlob outDiagnostics)
@@ -409,7 +398,7 @@ public static unsafe partial class IByteCodeRunnerExtensions
     }
     public static Result TryGetFunctionInfo(this IByteCodeRunner self, uint index, out Brutal.SlangApi.ByteCodeFuncInfo outInfo)
         => self.GetFunctionInfo(index, out outInfo);
-    public static Result TryExecute(this IByteCodeRunner self, void* argumentData, ByteSize64 argumentSize)
+    public static Result TryExecute(this IByteCodeRunner self, void* argumentData, ByteSize argumentSize)
         => self.Execute(argumentData, argumentSize);
     public static Result TryRegisterExtCall(this IByteCodeRunner self, byte* name, VMExtFunction functionPtr)
         => self.RegisterExtCall(name, functionPtr);

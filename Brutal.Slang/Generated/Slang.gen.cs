@@ -239,7 +239,7 @@ namespace Brutal.SlangApi
                 CompileRequest request,
                 RefString8 basePath,
                 void* libData,
-                ByteSize64 libDataSize
+                ByteSize libDataSize
             );
 
             [LibraryImport("slang")]
@@ -342,7 +342,7 @@ namespace Brutal.SlangApi
             public static partial void* spGetEntryPointCode(
                 CompileRequest request,
                 int entryPointIndex,
-                out ByteSize64 outSize
+                out ByteSize outSize
             );
 
             [LibraryImport("slang")]
@@ -372,7 +372,7 @@ namespace Brutal.SlangApi
             );
 
             [LibraryImport("slang")]
-            public static partial void* spGetCompileRequestCode(CompileRequest request, out ByteSize64 outSize);
+            public static partial void* spGetCompileRequestCode(CompileRequest request, out ByteSize outSize);
 
             [LibraryImport("slang")]
             public static partial Result spGetContainerCode(CompileRequest request, out nint outBlob);
@@ -382,7 +382,7 @@ namespace Brutal.SlangApi
                 CompileRequest request,
                 nint fileSystem,
                 void* data,
-                ByteSize64 size
+                ByteSize size
             );
 
             [LibraryImport("slang")]
@@ -402,7 +402,7 @@ namespace Brutal.SlangApi
             public static partial Result spExtractRepro(
                 nint session,
                 void* reproData,
-                ByteSize64 reproDataSize,
+                ByteSize reproDataSize,
                 nint fileSystem
             );
 
@@ -410,7 +410,7 @@ namespace Brutal.SlangApi
             public static partial Result spLoadReproAsFileSystem(
                 nint session,
                 void* reproData,
-                ByteSize64 reproDataSize,
+                ByteSize reproDataSize,
                 nint replaceFileSystem,
                 out nint outFileSystem
             );
@@ -473,7 +473,7 @@ namespace Brutal.SlangApi
             public static partial string spReflectionUserAttribute_GetArgumentValueString(
                 Brutal.SlangApi.ReflectionUserAttribute attrib,
                 uint index,
-                out ByteSize64 outSize
+                out ByteSize outSize
             );
 
             [LibraryImport("slang")]
@@ -507,10 +507,10 @@ namespace Brutal.SlangApi
             public static partial ReflectionVariable spReflectionType_GetFieldByIndex(ReflectionType type, uint index);
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflectionType_GetElementCount(ReflectionType type);
+            public static partial ByteSize spReflectionType_GetElementCount(ReflectionType type);
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflectionType_GetSpecializedElementCount(
+            public static partial ByteSize spReflectionType_GetSpecializedElementCount(
                 ReflectionType type,
                 Reflection reflection
             );
@@ -558,13 +558,13 @@ namespace Brutal.SlangApi
             public static partial Brutal.SlangApi.TypeKind spReflectionTypeLayout_getKind(ReflectionTypeLayout type);
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflectionTypeLayout_GetSize(
+            public static partial ByteSize spReflectionTypeLayout_GetSize(
                 ReflectionTypeLayout type,
                 Brutal.SlangApi.ParameterCategory category
             );
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflectionTypeLayout_GetStride(
+            public static partial ByteSize spReflectionTypeLayout_GetStride(
                 ReflectionTypeLayout type,
                 Brutal.SlangApi.ParameterCategory category
             );
@@ -597,7 +597,7 @@ namespace Brutal.SlangApi
             );
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflectionTypeLayout_GetElementStride(
+            public static partial ByteSize spReflectionTypeLayout_GetElementStride(
                 ReflectionTypeLayout type,
                 Brutal.SlangApi.ParameterCategory category
             );
@@ -801,7 +801,7 @@ namespace Brutal.SlangApi
             public static partial ReflectionType spReflectionVariable_GetType(ReflectionVariable var);
 
             [LibraryImport("slang")]
-            public static partial Brutal.SlangApi.ReflectionModifier spReflectionVariable_FindModifier(
+            public static partial ReflectionModifier spReflectionVariable_FindModifier(
                 ReflectionVariable var,
                 Brutal.SlangApi.ModifierID modifierID
             );
@@ -851,13 +851,13 @@ namespace Brutal.SlangApi
             );
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflectionVariableLayout_GetOffset(
+            public static partial ByteSize spReflectionVariableLayout_GetOffset(
                 ReflectionVariableLayout var,
                 Brutal.SlangApi.ParameterCategory category
             );
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflectionVariableLayout_GetSpace(
+            public static partial ByteSize spReflectionVariableLayout_GetSpace(
                 ReflectionVariableLayout var,
                 Brutal.SlangApi.ParameterCategory category
             );
@@ -875,7 +875,7 @@ namespace Brutal.SlangApi
             public static partial string spReflectionVariableLayout_GetSemanticName(ReflectionVariableLayout var);
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflectionVariableLayout_GetSemanticIndex(ReflectionVariableLayout var);
+            public static partial ByteSize spReflectionVariableLayout_GetSemanticIndex(ReflectionVariableLayout var);
 
             [LibraryImport("slang")]
             public static partial ReflectionDecl spReflectionFunction_asDecl(ReflectionFunction func);
@@ -888,7 +888,7 @@ namespace Brutal.SlangApi
             public static partial string spReflectionFunction_GetName(ReflectionFunction func);
 
             [LibraryImport("slang")]
-            public static partial Brutal.SlangApi.ReflectionModifier spReflectionFunction_FindModifier(
+            public static partial ReflectionModifier spReflectionFunction_FindModifier(
                 ReflectionFunction var,
                 Brutal.SlangApi.ModifierID modifierID
             );
@@ -981,7 +981,7 @@ namespace Brutal.SlangApi
             public static partial ReflectionDecl spReflectionDecl_getParent(ReflectionDecl decl);
 
             [LibraryImport("slang")]
-            public static partial Brutal.SlangApi.ReflectionModifier spReflectionDecl_findModifier(
+            public static partial ReflectionModifier spReflectionDecl_findModifier(
                 ReflectionDecl decl,
                 Brutal.SlangApi.ModifierID modifierID
             );
@@ -1120,7 +1120,7 @@ namespace Brutal.SlangApi
             public static partial void spReflectionEntryPoint_getComputeThreadGroupSize(
                 ReflectionEntryPoint entryPoint,
                 UInt axisCount,
-                out UInt outSizeAlongAxis
+                UInt* outSizeAlongAxis
             );
 
             [LibraryImport("slang")]
@@ -1251,7 +1251,7 @@ namespace Brutal.SlangApi
             public static partial UInt spReflection_getGlobalConstantBufferBinding(Reflection reflection);
 
             [LibraryImport("slang")]
-            public static partial ByteSize64 spReflection_getGlobalConstantBufferSize(Reflection reflection);
+            public static partial ByteSize spReflection_getGlobalConstantBufferSize(Reflection reflection);
 
             [LibraryImport("slang")]
             public static partial ReflectionType spReflection_specializeType(
@@ -1290,11 +1290,11 @@ namespace Brutal.SlangApi
             public static partial string spReflection_getHashedString(
                 Reflection reflection,
                 UInt index,
-                out ByteSize64 outCount
+                out ByteSize outCount
             );
 
             [LibraryImport("slang")]
-            public static partial UInt32 spComputeStringHash(RefString8 chars, ByteSize64 count);
+            public static partial UInt32 spComputeStringHash(RefString8 chars, ByteSize count);
 
             [LibraryImport("slang")]
             public static partial ReflectionTypeLayout spReflection_getGlobalParamsTypeLayout(Reflection reflection);
@@ -1311,9 +1311,6 @@ namespace Brutal.SlangApi
 
             [LibraryImport("slang")]
             public static partial Int spReflection_getBindlessSpaceIndex(Reflection reflection);
-
-            [LibraryImport("slang")]
-            public static partial nint spReflection_GetSession(Reflection reflection);
 
             [LibraryImport("slang")]
             public static partial Result spCompileRequest_getProgram(CompileRequest request, out nint outProgram);
@@ -1342,7 +1339,7 @@ namespace Brutal.SlangApi
             public static partial Result spCompileRequest_getSession(CompileRequest request, out nint outSession);
 
             [LibraryImport("slang")]
-            public static partial nint slang_createBlob(void* data, ByteSize64 size);
+            public static partial nint slang_createBlob(void* data, ByteSize size);
 
             [LibraryImport("slang")]
             public static partial nint slang_loadModuleFromSource(
@@ -1350,7 +1347,7 @@ namespace Brutal.SlangApi
                 RefString8 moduleName,
                 RefString8 path,
                 RefString8 source,
-                ByteSize64 sourceSize,
+                ByteSize sourceSize,
                 out nint outDiagnostics
             );
 
@@ -1360,7 +1357,7 @@ namespace Brutal.SlangApi
                 RefString8 moduleName,
                 RefString8 path,
                 void* source,
-                ByteSize64 sourceSize,
+                ByteSize sourceSize,
                 out nint outDiagnostics
             );
 
@@ -1368,7 +1365,7 @@ namespace Brutal.SlangApi
             public static partial Result slang_loadModuleInfoFromIRBlob(
                 nint session,
                 void* source,
-                ByteSize64 sourceSize,
+                ByteSize sourceSize,
                 ref Int outModuleVersion,
                 ref byte* outModuleCompilerVersion,
                 ref byte* outModuleName
@@ -1388,9 +1385,6 @@ namespace Brutal.SlangApi
                 Int apiVersion,
                 out nint outGlobalSession
             );
-
-            [LibraryImport("slang")]
-            public static partial nint slang_getEmbeddedCoreModule();
 
             [LibraryImport("slang")]
             public static partial void slang_shutdown();
@@ -1502,7 +1496,7 @@ namespace Brutal.SlangApi
         internal static unsafe Result ExtractRepro(
             nint session,
             void* reproData,
-            ByteSize64 reproDataSize,
+            ByteSize reproDataSize,
             nint fileSystem
         )
         {
@@ -1512,7 +1506,7 @@ namespace Brutal.SlangApi
         internal static unsafe Result LoadReproAsFileSystem(
             nint session,
             void* reproData,
-            ByteSize64 reproDataSize,
+            ByteSize reproDataSize,
             nint replaceFileSystem,
             out nint outFileSystem
         )
@@ -1567,12 +1561,12 @@ namespace Brutal.SlangApi
             return PInvoke.spReflectionType_GetFieldByIndex(type, index);
         }
 
-        public static ByteSize64 ReflectionTypeGetElementCount(ReflectionType type)
+        public static ByteSize ReflectionTypeGetElementCount(ReflectionType type)
         {
             return PInvoke.spReflectionType_GetElementCount(type);
         }
 
-        public static ByteSize64 ReflectionTypeGetSpecializedElementCount(ReflectionType type, Reflection reflection)
+        public static ByteSize ReflectionTypeGetSpecializedElementCount(ReflectionType type, Reflection reflection)
         {
             return PInvoke.spReflectionType_GetSpecializedElementCount(type, reflection);
         }
@@ -1637,7 +1631,7 @@ namespace Brutal.SlangApi
             return PInvoke.spReflectionTypeLayout_getKind(type);
         }
 
-        public static ByteSize64 ReflectionTypeLayoutGetSize(
+        public static ByteSize ReflectionTypeLayoutGetSize(
             ReflectionTypeLayout type,
             Brutal.SlangApi.ParameterCategory category
         )
@@ -1645,7 +1639,7 @@ namespace Brutal.SlangApi
             return PInvoke.spReflectionTypeLayout_GetSize(type, category);
         }
 
-        public static ByteSize64 ReflectionTypeLayoutGetStride(
+        public static ByteSize ReflectionTypeLayoutGetStride(
             ReflectionTypeLayout type,
             Brutal.SlangApi.ParameterCategory category
         )
@@ -1688,7 +1682,7 @@ namespace Brutal.SlangApi
             return PInvoke.spReflectionTypeLayout_GetExplicitCounter(typeLayout);
         }
 
-        public static ByteSize64 ReflectionTypeLayoutGetElementStride(
+        public static ByteSize ReflectionTypeLayoutGetElementStride(
             ReflectionTypeLayout type,
             Brutal.SlangApi.ParameterCategory category
         )
@@ -1954,7 +1948,7 @@ namespace Brutal.SlangApi
             return PInvoke.spReflectionVariable_GetType(var);
         }
 
-        public static Brutal.SlangApi.ReflectionModifier ReflectionVariableFindModifier(
+        public static ReflectionModifier ReflectionVariableFindModifier(
             ReflectionVariable var,
             Brutal.SlangApi.ModifierID modifierID
         )
@@ -2022,7 +2016,7 @@ namespace Brutal.SlangApi
             return PInvoke.spReflectionFunction_GetName(func);
         }
 
-        public static Brutal.SlangApi.ReflectionModifier ReflectionFunctionFindModifier(
+        public static ReflectionModifier ReflectionFunctionFindModifier(
             ReflectionFunction var,
             Brutal.SlangApi.ModifierID modifierID
         )
@@ -2149,7 +2143,7 @@ namespace Brutal.SlangApi
             return PInvoke.spReflectionDecl_getParent(decl);
         }
 
-        public static Brutal.SlangApi.ReflectionModifier ReflectionDeclFindModifier(
+        public static ReflectionModifier ReflectionDeclFindModifier(
             ReflectionDecl decl,
             Brutal.SlangApi.ModifierID modifierID
         )
@@ -2263,12 +2257,12 @@ namespace Brutal.SlangApi
             return PInvoke.spReflectionTypeParameter_GetConstraintByIndex(typeParam, index);
         }
 
-        public static UInt32 ComputeStringHash(RefString8 chars, ByteSize64 count)
+        public static UInt32 ComputeStringHash(RefString8 chars, ByteSize count)
         {
             return PInvoke.spComputeStringHash(chars, count);
         }
 
-        internal static unsafe nint CreateBlob(void* data, ByteSize64 size)
+        internal static unsafe nint CreateBlob(void* data, ByteSize size)
         {
             return PInvoke.slang_createBlob(data, size);
         }
@@ -2278,7 +2272,7 @@ namespace Brutal.SlangApi
             RefString8 moduleName,
             RefString8 path,
             RefString8 source,
-            ByteSize64 sourceSize,
+            ByteSize sourceSize,
             out nint outDiagnostics
         )
         {
@@ -2297,7 +2291,7 @@ namespace Brutal.SlangApi
             RefString8 moduleName,
             RefString8 path,
             void* source,
-            ByteSize64 sourceSize,
+            ByteSize sourceSize,
             out nint outDiagnostics
         )
         {
@@ -2314,7 +2308,7 @@ namespace Brutal.SlangApi
         internal static unsafe Result LoadModuleInfoFromIRBlob(
             nint session,
             void* source,
-            ByteSize64 sourceSize,
+            ByteSize sourceSize,
             ref Int outModuleVersion,
             ref byte* outModuleCompilerVersion,
             ref byte* outModuleName
@@ -2346,11 +2340,6 @@ namespace Brutal.SlangApi
         internal static Result CreateGlobalSessionWithoutCoreModule(Int apiVersion, out nint outGlobalSession)
         {
             return PInvoke.slang_createGlobalSessionWithoutCoreModule(apiVersion, out outGlobalSession);
-        }
-
-        internal static nint GetEmbeddedCoreModule()
-        {
-            return PInvoke.slang_getEmbeddedCoreModule();
         }
 
         public static void Shutdown()

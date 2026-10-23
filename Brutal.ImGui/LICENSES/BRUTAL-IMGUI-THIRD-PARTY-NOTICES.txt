@@ -1,26 +1,31 @@
 THIRD-PARTY LICENSE NOTICES
 The Brutal.ImGui packages
 
-This file ships in all eight packages named below. They redistribute the third-party
+This file ships in all eleven packages named below. They redistribute the third-party
 components listed here, each reproduced with the license that governs it.
 
-  One file serves all eight packages, so this table says which components apply to
+  One file serves all eleven packages, so this table says which components apply to
   the package you are holding:
 
-    RocketWerkz.Brutal.ImGui               Dear ImGui, and the three stb libraries
+    Ahwoo.BRUTAL.ImGui                     Dear ImGui, and the three stb libraries
                                            compiled into it
-    RocketWerkz.Brutal.ImGui.Backends      Dear ImGui's platform and renderer
+    Ahwoo.BRUTAL.ImGui.Backends            Dear ImGui's platform and renderer
                                            backends, translated to C#
-    RocketWerkz.Brutal.ImGui.DemoWindow    Dear ImGui's demo sources, translated
+    Ahwoo.BRUTAL.ImGui.DemoWindow          Dear ImGui's demo sources, translated
                                            to C#
-    RocketWerkz.Brutal.ImGui.FreeType      Dear ImGui's FreeType font adapter
-    RocketWerkz.Brutal.ImPlot              ImPlot
-    RocketWerkz.Brutal.ImPlot.DemoWindow   ImPlot's demo sources, translated to C#
-    RocketWerkz.Brutal.ImGui.Abstractions  no third-party code
-    RocketWerkz.Brutal.ImGui.Extensions    no third-party code
+    Ahwoo.BRUTAL.ImGui.FreeType            Dear ImGui's FreeType font adapter
+    Ahwoo.BRUTAL.ImPlot                    ImPlot
+    Ahwoo.BRUTAL.ImPlot.DemoWindow         ImPlot's demo sources, translated to C#
+    Ahwoo.BRUTAL.ImGui.Native              Dear ImGui's native library, and the three
+                                           stb libraries compiled into it
+    Ahwoo.BRUTAL.ImGui.FreeType.Native     Dear ImGui's FreeType font adapter, as a
+                                           native library
+    Ahwoo.BRUTAL.ImPlot.Native             ImPlot's native library
+    Ahwoo.BRUTAL.ImGui.Abstractions        no third-party code
+    Ahwoo.BRUTAL.ImGui.Extensions          no third-party code
 
-  Where a package ships native libraries, it ships them for every runtime identifier
-  it supports (win-x64, linux-x64, osx-arm64):
+  The native libraries ship only in the three .Native packages, each for every
+  runtime identifier it supports (win-x64, linux-x64, osx-arm64):
 
     Dear ImGui   1.92.2   imgui.dll / libimgui.so / libimgui.dylib
                           imgui_freetype.dll / libimgui_freetype.so / libimgui_freetype.dylib
@@ -35,9 +40,9 @@ components listed here, each reproduced with the license that governs it.
   upstream headers, and the backend and demo assemblies are C# translations of
   upstream sources.
 
-  RocketWerkz.Brutal.ImGui.FreeType binds Dear ImGui's FreeType font adapter, which
+  Ahwoo.BRUTAL.ImGui.FreeType binds Dear ImGui's FreeType font adapter, which
   is Dear ImGui code and is covered by the Dear ImGui section below. FreeType itself
-  is in none of these eight packages; it is supplied by RocketWerkz.Brutal.FreeType,
+  is in none of these eleven packages; it is supplied by Ahwoo.BRUTAL.FreeType,
   whose own notices reproduce the FreeType License in full.
 
 

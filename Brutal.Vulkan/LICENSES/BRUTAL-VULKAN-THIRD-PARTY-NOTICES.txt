@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Vulkan
+Ahwoo.BRUTAL.Vulkan
 
 Brutal.Vulkan contains two kinds of Khronos material, each reproduced below with the
 license that governs it. The managed bindings are generated from the Vulkan API registry.

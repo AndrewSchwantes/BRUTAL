@@ -1,5 +1,7 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 
 namespace Brutal.GltfApi;
 
@@ -149,20 +151,36 @@ public static class GltfUtility
         }
     }
 
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "Reflection is only used when JsonSerializer.IsReflectionEnabledByDefault, which is false under trimming and Native AOT."
+    )]
+    [UnconditionalSuppressMessage(
+        "AOT",
+        "IL3050",
+        Justification = "Reflection is only used when JsonSerializer.IsReflectionEnabledByDefault, which is false under trimming and Native AOT."
+    )]
     private static JsonSerializerOptions CreateSerializerOptions()
     {
-        var options = new JsonSerializerOptions();
-        // glTF has no concept of an explicit JSON null; absent optional properties must be
-        // omitted entirely or strict validators reject the asset (e.g. "uri": null in GLB).
-        options.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
-        options.Converters.Add(new JsonHelpers.Float3JsonConverter());
-        options.Converters.Add(new JsonHelpers.Float4JsonConverter());
-        options.Converters.Add(new JsonHelpers.FloatQuatJsonConverter());
-        options.Converters.Add(new JsonHelpers.Float4X4JsonConverter());
+        // Settings, converters and metadata come from the source-generated GltfJsonContext, which is all
+        // that is available under trimming and Native AOT. When reflection is enabled, fall back to it for
+        // types the context doesn't know, such as custom extension classes passed to GetExtension<T> or
+        // assigned to an Extensions map.
+        var options = new JsonSerializerOptions(GltfJsonContext.Default.Options);
+        if (JsonSerializer.IsReflectionEnabledByDefault)
+        {
+            options.TypeInfoResolver = JsonTypeInfoResolver.Combine(
+                GltfJsonContext.Default,
+                new DefaultJsonTypeInfoResolver()
+            );
+        }
         return options;
     }
 
     internal static readonly JsonSerializerOptions JsonOptions = CreateSerializerOptions();
+
+    private static readonly JsonTypeInfo<Gltf> GltfTypeInfo = (JsonTypeInfo<Gltf>)JsonOptions.GetTypeInfo(typeof(Gltf));
 
     /// <summary>
     /// Parses a JSON formatted text content
@@ -171,7 +189,7 @@ public static class GltfUtility
     /// <returns><code>Schema.Gltf</code> model</returns>
     public static Gltf DeserializeModelJson(string fileData)
     {
-        return JsonSerializer.Deserialize<Gltf>(fileData, JsonOptions) ?? throw new NullReferenceException();
+        return JsonSerializer.Deserialize(fileData, GltfTypeInfo) ?? throw new NullReferenceException();
     }
 
     /// <summary>
@@ -181,7 +199,7 @@ public static class GltfUtility
     /// <returns>JSON formatted text</returns>
     public static string SerializeModelJson(this Gltf model)
     {
-        return JsonSerializer.Serialize(model, JsonOptions);
+        return JsonSerializer.Serialize(model, GltfTypeInfo);
     }
 
     private static byte[]? TryLoadBase64BinaryBufferUnchecked(Buffer buffer, string prefix)

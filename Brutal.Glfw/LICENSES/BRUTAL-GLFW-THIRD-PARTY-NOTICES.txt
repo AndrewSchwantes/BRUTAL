@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Glfw
+Ahwoo.BRUTAL.Glfw
 
 Brutal.Glfw redistributes the third-party components named below, as native libraries.
 Each is reproduced with the license that governs it.

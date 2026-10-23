@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Localization
+Ahwoo.BRUTAL.Localization
 
 This package redistributes the third-party component listed below. It is reproduced
 with the license that governs it.

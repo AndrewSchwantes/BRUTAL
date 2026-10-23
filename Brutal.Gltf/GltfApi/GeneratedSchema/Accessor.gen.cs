@@ -158,7 +158,7 @@ namespace Brutal.GltfApi {
         /// <summary>
         /// Specifies if the accessor's elements are scalars, vectors, or matrices.
         /// </summary>
-        [System.Text.Json.Serialization.JsonConverterAttribute(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        [System.Text.Json.Serialization.JsonConverterAttribute(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<TypeEnum>))]
         [System.Text.Json.Serialization.JsonRequiredAttribute()]
         [System.Text.Json.Serialization.JsonPropertyNameAttribute("type")]
         public TypeEnum Type {

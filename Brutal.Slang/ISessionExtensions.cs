@@ -139,6 +139,24 @@ public static unsafe partial class ISessionExtensions
             return self.LoadModuleFromIRBlob(nameP, pathP, source, out outDiagnostics);
     }
 
+    /// <summary>
+    ///     Writes the RTTI bytes Slang uses to identify <paramref name="type"/>'s conformance to
+    ///     <paramref name="interfaceType"/> into <paramref name="buffer"/>, which must hold at
+    ///     least 16 bytes.
+    /// </summary>
+    /// <exception cref="SlangException">Thrown if slang reports a failing <see cref="Result"/>.</exception>
+    public static void GetDynamicObjectRTTIBytes(
+        this ISession self,
+        TypeReflection type,
+        TypeReflection interfaceType,
+        Span<byte> buffer
+    )
+    {
+        fixed (byte* p = buffer)
+            self.GetDynamicObjectRTTIBytes(type, interfaceType, (uint*)p, checked((uint)buffer.Length))
+                .ThrowIfFailure();
+    }
+
     private const int ShortStringStackBytes = 256;
     private const int LongStringStackBytes = 8192;
 

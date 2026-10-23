@@ -64,7 +64,7 @@ namespace Brutal.GltfApi {
         /// <summary>
         /// Interpolation algorithm.
         /// </summary>
-        [System.Text.Json.Serialization.JsonConverterAttribute(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        [System.Text.Json.Serialization.JsonConverterAttribute(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<InterpolationEnum>))]
         [System.Text.Json.Serialization.JsonPropertyNameAttribute("interpolation")]
         public InterpolationEnum Interpolation {
             get {

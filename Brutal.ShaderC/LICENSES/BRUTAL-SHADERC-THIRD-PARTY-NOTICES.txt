@@ -2,7 +2,7 @@
 BRUTAL SHADERC - THIRD-PARTY NOTICES
 ==============================================================================
 
-RocketWerkz.Brutal.ShaderC redistributes third-party software inside the native
+Ahwoo.BRUTAL.ShaderC redistributes third-party software inside the native
 libraries it ships under runtimes/<rid>/native/:
 
     shaderc_shared        win-x64, linux-x64, osx-arm64

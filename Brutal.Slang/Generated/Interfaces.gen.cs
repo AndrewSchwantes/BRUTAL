@@ -7,17 +7,7 @@ namespace Brutal.SlangApi
 {
     [GeneratedComInterface]
     [Guid("00000000-0000-0000-c000-000000000046")]
-    public unsafe partial interface ISlangUnknown
-    {
-        [PreserveSig]
-        Result QueryInterface(ref Brutal.SlangApi.Uuid uuid, out void* outObject);
-
-        [PreserveSig]
-        uint AddRef();
-
-        [PreserveSig]
-        uint Release();
-    };
+    public unsafe partial interface ISlangUnknown { };
 
     [GeneratedComInterface]
     [Guid("87ede0e1-4852-44b0-8bf2-cb31874de239")]
@@ -43,7 +33,8 @@ namespace Brutal.SlangApi
         void* GetBufferPointer();
 
         [PreserveSig]
-        ByteSize64 GetBufferSize();
+        [return: MarshalUsing(typeof(SlangSizeMarshaller))]
+        ByteSize GetBufferSize();
     };
 
     [GeneratedComInterface]
@@ -51,7 +42,10 @@ namespace Brutal.SlangApi
     public unsafe partial interface ISlangFileSystem : Brutal.SlangApi.ISlangCastable
     {
         [PreserveSig]
-        Result LoadFile(byte* path, out ISlangBlob outBlob);
+        Result LoadFile(
+            byte* path,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outBlob
+        );
     };
 
     [GeneratedComInterface]
@@ -75,7 +69,11 @@ namespace Brutal.SlangApi
     public unsafe partial interface ISlangSharedLibraryLoader
     {
         [PreserveSig]
-        Result LoadSharedLibrary(byte* path, out ISlangSharedLibrary sharedLibraryOut);
+        Result LoadSharedLibrary(
+            byte* path,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangSharedLibrary>))]
+                out ISlangSharedLibrary sharedLibraryOut
+        );
     };
 
     [GeneratedComInterface]
@@ -83,21 +81,28 @@ namespace Brutal.SlangApi
     public unsafe partial interface ISlangFileSystemExt : Brutal.SlangApi.ISlangFileSystem
     {
         [PreserveSig]
-        Result GetFileUniqueIdentity(byte* path, out ISlangBlob outUniqueIdentity);
+        Result GetFileUniqueIdentity(
+            byte* path,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outUniqueIdentity
+        );
 
         [PreserveSig]
         Result CalcCombinedPath(
             Brutal.SlangApi.PathType fromPathType,
             byte* fromPath,
             byte* path,
-            out ISlangBlob pathOut
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob pathOut
         );
 
         [PreserveSig]
         Result GetPathType(byte* path, out Brutal.SlangApi.PathType pathTypeOut);
 
         [PreserveSig]
-        Result GetPath(PathKind kind, byte* path, out ISlangBlob outPath);
+        Result GetPath(
+            PathKind kind,
+            byte* path,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outPath
+        );
 
         [PreserveSig]
         void ClearCache();
@@ -114,10 +119,13 @@ namespace Brutal.SlangApi
     public unsafe partial interface ISlangMutableFileSystem : Brutal.SlangApi.ISlangFileSystemExt
     {
         [PreserveSig]
-        Result SaveFile(byte* path, void* data, ByteSize64 size);
+        Result SaveFile(byte* path, void* data, [MarshalUsing(typeof(SlangSizeMarshaller))] ByteSize size);
 
         [PreserveSig]
-        Result SaveFileBlob(byte* path, ISlangBlob dataBlob);
+        Result SaveFileBlob(
+            byte* path,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] ISlangBlob dataBlob
+        );
 
         [PreserveSig]
         Result Remove(byte* path);
@@ -131,18 +139,19 @@ namespace Brutal.SlangApi
     public unsafe partial interface ISlangWriter
     {
         [PreserveSig]
-        byte* BeginAppendBuffer(ByteSize64 maxNumChars);
+        byte* BeginAppendBuffer([MarshalUsing(typeof(SlangSizeMarshaller))] ByteSize maxNumChars);
 
         [PreserveSig]
-        Result EndAppendBuffer(byte* buffer, ByteSize64 numChars);
+        Result EndAppendBuffer(byte* buffer, [MarshalUsing(typeof(SlangSizeMarshaller))] ByteSize numChars);
 
         [PreserveSig]
-        Result Write(byte* chars, ByteSize64 numChars);
+        Result Write(byte* chars, [MarshalUsing(typeof(SlangSizeMarshaller))] ByteSize numChars);
 
         [PreserveSig]
         void Flush();
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(SlangBoolMarshaller))]
         Bool IsConsole();
 
         [PreserveSig]
@@ -154,7 +163,8 @@ namespace Brutal.SlangApi
     public unsafe partial interface ISlangProfiler
     {
         [PreserveSig]
-        ByteSize64 GetEntryCount();
+        [return: MarshalUsing(typeof(SlangSizeMarshaller))]
+        ByteSize GetEntryCount();
 
         [PreserveSig]
         byte* GetEntryName(uint index);
@@ -171,7 +181,11 @@ namespace Brutal.SlangApi
     public unsafe partial interface IGlobalSession
     {
         [PreserveSig]
-        Result CreateSession(ref Brutal.SlangApi.SessionDesc desc, out Brutal.SlangApi.ISession outSession);
+        Result CreateSession(
+            ref Brutal.SlangApi.SessionDesc desc,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.ISession>))]
+                out Brutal.SlangApi.ISession outSession
+        );
 
         [PreserveSig]
         Brutal.SlangApi.ProfileID FindProfile(byte* name);
@@ -183,7 +197,10 @@ namespace Brutal.SlangApi
         void SetDownstreamCompilerPrelude(Brutal.SlangApi.PassThrough passThrough, byte* preludeText);
 
         [PreserveSig]
-        void GetDownstreamCompilerPrelude(Brutal.SlangApi.PassThrough passThrough, out ISlangBlob outPrelude);
+        void GetDownstreamCompilerPrelude(
+            Brutal.SlangApi.PassThrough passThrough,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outPrelude
+        );
 
         [PreserveSig]
         byte* GetBuildTagString();
@@ -201,18 +218,27 @@ namespace Brutal.SlangApi
         void SetLanguagePrelude(Brutal.SlangApi.SourceLanguage sourceLanguage, byte* preludeText);
 
         [PreserveSig]
-        void GetLanguagePrelude(Brutal.SlangApi.SourceLanguage sourceLanguage, out ISlangBlob outPrelude);
+        void GetLanguagePrelude(
+            Brutal.SlangApi.SourceLanguage sourceLanguage,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outPrelude
+        );
 
         [PreserveSig]
-        Result CreateCompileRequest(out Brutal.SlangApi.ICompileRequest outCompileRequest);
+        Result CreateCompileRequest(
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.ICompileRequest>))]
+                out Brutal.SlangApi.ICompileRequest outCompileRequest
+        );
 
         [PreserveSig]
         void AddBuiltins(byte* sourcePath, byte* sourceString);
 
         [PreserveSig]
-        void SetSharedLibraryLoader(ISlangSharedLibraryLoader loader);
+        void SetSharedLibraryLoader(
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangSharedLibraryLoader>))] ISlangSharedLibraryLoader loader
+        );
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(BorrowedSlangInterfaceMarshaller<ISlangSharedLibraryLoader>))]
         ISlangSharedLibraryLoader? GetSharedLibraryLoader();
 
         [PreserveSig]
@@ -225,10 +251,16 @@ namespace Brutal.SlangApi
         Result CompileCoreModule(CompileCoreModuleFlags flags);
 
         [PreserveSig]
-        Result LoadCoreModule(void* coreModule, ByteSize64 coreModuleSizeInBytes);
+        Result LoadCoreModule(
+            void* coreModule,
+            [MarshalUsing(typeof(SlangSizeMarshaller))] ByteSize coreModuleSizeInBytes
+        );
 
         [PreserveSig]
-        Result SaveCoreModule(Brutal.SlangApi.ArchiveType archiveType, out ISlangBlob outBlob);
+        Result SaveCoreModule(
+            Brutal.SlangApi.ArchiveType archiveType,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outBlob
+        );
 
         [PreserveSig]
         Brutal.SlangApi.CapabilityID FindCapability(byte* name);
@@ -257,23 +289,30 @@ namespace Brutal.SlangApi
             int argc,
             byte** argv,
             out Brutal.SlangApi.SessionDesc outSessionDesc,
-            out ISlangUnknown outAuxAllocation
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangUnknown>))] out ISlangUnknown outAuxAllocation
         );
 
         [PreserveSig]
-        Result GetSessionDescDigest(in Brutal.SlangApi.SessionDesc sessionDesc, out ISlangBlob outBlob);
+        Result GetSessionDescDigest(
+            in Brutal.SlangApi.SessionDesc sessionDesc,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outBlob
+        );
 
         [PreserveSig]
         Result CompileBuiltinModule(Brutal.SlangApi.BuiltinModuleName module, CompileCoreModuleFlags flags);
 
         [PreserveSig]
-        Result LoadBuiltinModule(Brutal.SlangApi.BuiltinModuleName module, void* moduleData, ByteSize64 sizeInBytes);
+        Result LoadBuiltinModule(
+            Brutal.SlangApi.BuiltinModuleName module,
+            void* moduleData,
+            [MarshalUsing(typeof(SlangSizeMarshaller))] ByteSize sizeInBytes
+        );
 
         [PreserveSig]
         Result SaveBuiltinModule(
             Brutal.SlangApi.BuiltinModuleName module,
             Brutal.SlangApi.ArchiveType archiveType,
-            out ISlangBlob outBlob
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outBlob
         );
     };
 
@@ -282,118 +321,154 @@ namespace Brutal.SlangApi
     public unsafe partial interface ISession
     {
         [PreserveSig]
+        [return: MarshalUsing(typeof(BorrowedSlangInterfaceMarshaller<Brutal.SlangApi.IGlobalSession>))]
         Brutal.SlangApi.IGlobalSession? GetGlobalSession();
 
         [PreserveSig]
-        Brutal.SlangApi.IModule? LoadModule(byte* moduleName, out IBlob outDiagnostics);
+        [return: MarshalUsing(typeof(BorrowedSlangInterfaceMarshaller<Brutal.SlangApi.IModule>))]
+        Brutal.SlangApi.IModule? LoadModule(
+            byte* moduleName,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
+        );
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(BorrowedSlangInterfaceMarshaller<Brutal.SlangApi.IModule>))]
         Brutal.SlangApi.IModule? LoadModuleFromSource(
             byte* moduleName,
             byte* path,
-            IBlob source,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] IBlob source,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
 
         [PreserveSig]
         Result CreateCompositeComponentType(
             nint* componentTypes,
             Int componentTypeCount,
-            out Brutal.SlangApi.IComponentType outCompositeComponentType,
-            out ISlangBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IComponentType>))]
+                out Brutal.SlangApi.IComponentType outCompositeComponentType,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
         );
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
         Brutal.SlangApi.TypeReflection SpecializeType(
-            Brutal.SlangApi.TypeReflection type,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection type,
             in Brutal.SlangApi.SpecializationArg specializationArgs,
             Int specializationArgCount,
-            out ISlangBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
         );
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeLayoutReflection>))]
         Brutal.SlangApi.TypeLayoutReflection GetTypeLayout(
-            Brutal.SlangApi.TypeReflection type,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection type,
             Int targetIndex,
             Brutal.SlangApi.LayoutRules rules,
-            out ISlangBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
         );
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
         Brutal.SlangApi.TypeReflection GetContainerType(
-            Brutal.SlangApi.TypeReflection elementType,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection elementType,
             Brutal.SlangApi.ContainerType containerType,
-            out ISlangBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
         );
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
         Brutal.SlangApi.TypeReflection GetDynamicType();
 
         [PreserveSig]
-        Result GetTypeRTTIMangledName(Brutal.SlangApi.TypeReflection type, out ISlangBlob outNameBlob);
+        Result GetTypeRTTIMangledName(
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection type,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outNameBlob
+        );
 
         [PreserveSig]
         Result GetTypeConformanceWitnessMangledName(
-            Brutal.SlangApi.TypeReflection type,
-            Brutal.SlangApi.TypeReflection interfaceType,
-            out ISlangBlob outNameBlob
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection type,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection interfaceType,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outNameBlob
         );
 
         [PreserveSig]
         Result GetTypeConformanceWitnessSequentialID(
-            Brutal.SlangApi.TypeReflection type,
-            Brutal.SlangApi.TypeReflection interfaceType,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection type,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection interfaceType,
             out uint outId
         );
 
         [PreserveSig]
-        Result CreateCompileRequest(out CompileRequest outCompileRequest);
-
-        [PreserveSig]
-        Result CreateTypeConformanceComponentType(
-            Brutal.SlangApi.TypeReflection type,
-            Brutal.SlangApi.TypeReflection interfaceType,
-            out Brutal.SlangApi.ITypeConformance outConformance,
-            Int conformanceIdOverride,
-            out ISlangBlob outDiagnostics
+        Result CreateCompileRequest(
+            [MarshalUsing(typeof(SlangHandleMarshaller<CompileRequest>))] out CompileRequest outCompileRequest
         );
 
         [PreserveSig]
+        Result CreateTypeConformanceComponentType(
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection type,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection interfaceType,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.ITypeConformance>))]
+                out Brutal.SlangApi.ITypeConformance outConformance,
+            Int conformanceIdOverride,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
+        );
+
+        [PreserveSig]
+        [return: MarshalUsing(typeof(BorrowedSlangInterfaceMarshaller<Brutal.SlangApi.IModule>))]
         Brutal.SlangApi.IModule? LoadModuleFromIRBlob(
             byte* moduleName,
             byte* path,
-            IBlob source,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] IBlob source,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
 
         [PreserveSig]
         Int GetLoadedModuleCount();
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(BorrowedSlangInterfaceMarshaller<Brutal.SlangApi.IModule>))]
         Brutal.SlangApi.IModule? GetLoadedModule(Int index);
 
         [PreserveSig]
-        Brutal.Bool8 IsBinaryModuleUpToDate(byte* modulePath, IBlob binaryModuleBlob);
+        [return: MarshalUsing(typeof(SlangBoolMarshaller))]
+        Brutal.Bool8 IsBinaryModuleUpToDate(
+            byte* modulePath,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] IBlob binaryModuleBlob
+        );
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(BorrowedSlangInterfaceMarshaller<Brutal.SlangApi.IModule>))]
         Brutal.SlangApi.IModule? LoadModuleFromSourceString(
             byte* moduleName,
             byte* path,
             byte* @string,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
 
         [PreserveSig]
         Result GetDynamicObjectRTTIBytes(
-            Brutal.SlangApi.TypeReflection type,
-            Brutal.SlangApi.TypeReflection interfaceType,
-            out uint outRTTIDataBuffer,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection type,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.TypeReflection>))]
+                Brutal.SlangApi.TypeReflection interfaceType,
+            uint* outRTTIDataBuffer,
             uint bufferSizeInBytes
         );
 
         [PreserveSig]
         Result LoadModuleInfoFromIRBlob(
-            IBlob source,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] IBlob source,
             ref Int outModuleVersion,
             ref byte* outModuleCompilerVersion,
             ref byte* outModuleName
@@ -401,7 +476,8 @@ namespace Brutal.SlangApi
 
         [PreserveSig]
         Result GetDeclSourceLocation(
-            Brutal.SlangApi.DeclReflection decl,
+            [MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.DeclReflection>))]
+                Brutal.SlangApi.DeclReflection decl,
             out Brutal.SlangApi.SourceLocation outLocation
         );
     };
@@ -411,65 +487,105 @@ namespace Brutal.SlangApi
     public unsafe partial interface IComponentType
     {
         [PreserveSig]
+        [return: MarshalUsing(typeof(BorrowedSlangInterfaceMarshaller<Brutal.SlangApi.ISession>))]
         Brutal.SlangApi.ISession? GetSession();
 
         [PreserveSig]
-        ProgramLayout GetLayout(Int targetIndex, out IBlob outDiagnostics);
+        [return: MarshalUsing(typeof(SlangHandleMarshaller<ProgramLayout>))]
+        ProgramLayout GetLayout(
+            Int targetIndex,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
+        );
 
         [PreserveSig]
         Int GetSpecializationParamCount();
 
         [PreserveSig]
-        Result GetEntryPointCode(Int entryPointIndex, Int targetIndex, out IBlob outCode, out IBlob outDiagnostics);
+        Result GetEntryPointCode(
+            Int entryPointIndex,
+            Int targetIndex,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outCode,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
+        );
 
         [PreserveSig]
-        Result GetResultAsFileSystem(Int entryPointIndex, Int targetIndex, out ISlangMutableFileSystem outFileSystem);
+        Result GetResultAsFileSystem(
+            Int entryPointIndex,
+            Int targetIndex,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangMutableFileSystem>))]
+                out ISlangMutableFileSystem outFileSystem
+        );
 
         [PreserveSig]
-        void GetEntryPointHash(Int entryPointIndex, Int targetIndex, out IBlob outHash);
+        void GetEntryPointHash(
+            Int entryPointIndex,
+            Int targetIndex,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outHash
+        );
 
         [PreserveSig]
         Result Specialize(
             in Brutal.SlangApi.SpecializationArg specializationArgs,
             Int specializationArgCount,
-            out Brutal.SlangApi.IComponentType outSpecializedComponentType,
-            out ISlangBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IComponentType>))]
+                out Brutal.SlangApi.IComponentType outSpecializedComponentType,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
         );
 
         [PreserveSig]
-        Result Link(out Brutal.SlangApi.IComponentType outLinkedComponentType, out ISlangBlob outDiagnostics);
+        Result Link(
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IComponentType>))]
+                out Brutal.SlangApi.IComponentType outLinkedComponentType,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
+        );
 
         [PreserveSig]
         Result GetEntryPointHostCallable(
             int entryPointIndex,
             int targetIndex,
-            out ISlangSharedLibrary outSharedLibrary,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangSharedLibrary>))]
+                out ISlangSharedLibrary outSharedLibrary,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
 
         [PreserveSig]
-        Result RenameEntryPoint(byte* newName, out Brutal.SlangApi.IComponentType outEntryPoint);
+        Result RenameEntryPoint(
+            byte* newName,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IComponentType>))]
+                out Brutal.SlangApi.IComponentType outEntryPoint
+        );
 
         [PreserveSig]
         Result LinkWithOptions(
-            out Brutal.SlangApi.IComponentType outLinkedComponentType,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IComponentType>))]
+                out Brutal.SlangApi.IComponentType outLinkedComponentType,
             uint compilerOptionEntryCount,
             in Brutal.SlangApi.CompilerOptionEntry compilerOptionEntries,
-            out ISlangBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
         );
 
         [PreserveSig]
-        Result GetTargetCode(Int targetIndex, out IBlob outCode, out IBlob outDiagnostics);
+        Result GetTargetCode(
+            Int targetIndex,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outCode,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
+        );
 
         [PreserveSig]
-        Result GetTargetMetadata(Int targetIndex, out Brutal.SlangApi.IMetadata outMetadata, out IBlob outDiagnostics);
+        Result GetTargetMetadata(
+            Int targetIndex,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IMetadata>))]
+                out Brutal.SlangApi.IMetadata outMetadata,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
+        );
 
         [PreserveSig]
         Result GetEntryPointMetadata(
             Int entryPointIndex,
             Int targetIndex,
-            out Brutal.SlangApi.IMetadata outMetadata,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IMetadata>))]
+                out Brutal.SlangApi.IMetadata outMetadata,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
     };
 
@@ -478,16 +594,24 @@ namespace Brutal.SlangApi
     public unsafe partial interface IModule : Brutal.SlangApi.IComponentType
     {
         [PreserveSig]
-        Result FindEntryPointByName(byte* name, out Brutal.SlangApi.IEntryPoint outEntryPoint);
+        Result FindEntryPointByName(
+            byte* name,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IEntryPoint>))]
+                out Brutal.SlangApi.IEntryPoint outEntryPoint
+        );
 
         [PreserveSig]
         Int32 GetDefinedEntryPointCount();
 
         [PreserveSig]
-        Result GetDefinedEntryPoint(Int32 index, out Brutal.SlangApi.IEntryPoint outEntryPoint);
+        Result GetDefinedEntryPoint(
+            Int32 index,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IEntryPoint>))]
+                out Brutal.SlangApi.IEntryPoint outEntryPoint
+        );
 
         [PreserveSig]
-        Result Serialize(out ISlangBlob outSerializedBlob);
+        Result Serialize([MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outSerializedBlob);
 
         [PreserveSig]
         Result WriteToFile(byte* fileName);
@@ -505,8 +629,9 @@ namespace Brutal.SlangApi
         Result FindAndCheckEntryPoint(
             byte* name,
             Brutal.SlangApi.Stage stage,
-            out Brutal.SlangApi.IEntryPoint outEntryPoint,
-            out ISlangBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IEntryPoint>))]
+                out Brutal.SlangApi.IEntryPoint outEntryPoint,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
         );
 
         [PreserveSig]
@@ -516,10 +641,11 @@ namespace Brutal.SlangApi
         byte* GetDependencyFilePath(Int32 index);
 
         [PreserveSig]
+        [return: MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.DeclReflection>))]
         Brutal.SlangApi.DeclReflection GetModuleReflection();
 
         [PreserveSig]
-        Result Disassemble(out IBlob outDisassembledBlob);
+        Result Disassemble([MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDisassembledBlob);
     };
 
     [GeneratedComInterface]
@@ -535,7 +661,7 @@ namespace Brutal.SlangApi
             Brutal.SlangApi.ParameterCategory category,
             UInt spaceIndex,
             UInt registerIndex,
-            ref Brutal.Bool8 outUsed
+            [MarshalUsing(typeof(SlangBoolMarshaller))] ref Brutal.Bool8 outUsed
         );
 
         [PreserveSig]
@@ -550,10 +676,13 @@ namespace Brutal.SlangApi
         uint GetItemCount();
 
         [PreserveSig]
-        Result GetItemData(uint index, out IBlob outblob);
+        Result GetItemData(uint index, [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outblob);
 
         [PreserveSig]
-        Result GetMetadata(out Brutal.SlangApi.IMetadata outMetadata);
+        Result GetMetadata(
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IMetadata>))]
+                out Brutal.SlangApi.IMetadata outMetadata
+        );
     };
 
     [GeneratedComInterface]
@@ -561,6 +690,7 @@ namespace Brutal.SlangApi
     public unsafe partial interface IEntryPoint : Brutal.SlangApi.IComponentType
     {
         [PreserveSig]
+        [return: MarshalUsing(typeof(SlangHandleMarshaller<Brutal.SlangApi.FunctionReflection>))]
         Brutal.SlangApi.FunctionReflection GetFunctionReflection();
     };
 
@@ -571,23 +701,26 @@ namespace Brutal.SlangApi
         [PreserveSig]
         Result GetTargetCompileResult(
             Int targetIndex,
-            out Brutal.SlangApi.ICompileResult outCompileResult,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.ICompileResult>))]
+                out Brutal.SlangApi.ICompileResult outCompileResult,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
 
         [PreserveSig]
         Result GetEntryPointCompileResult(
             Int entryPointIndex,
             Int targetIndex,
-            out Brutal.SlangApi.ICompileResult outCompileResult,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.ICompileResult>))]
+                out Brutal.SlangApi.ICompileResult outCompileResult,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
 
         [PreserveSig]
         Result GetTargetHostCallable(
             int targetIndex,
-            out ISlangSharedLibrary outSharedLibrary,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangSharedLibrary>))]
+                out ISlangSharedLibrary outSharedLibrary,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
     };
 
@@ -596,13 +729,16 @@ namespace Brutal.SlangApi
     public unsafe partial interface IModulePrecompileService_Experimental
     {
         [PreserveSig]
-        Result PrecompileForTarget(Brutal.SlangApi.CompileTarget target, out ISlangBlob outDiagnostics);
+        Result PrecompileForTarget(
+            Brutal.SlangApi.CompileTarget target,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<ISlangBlob>))] out ISlangBlob outDiagnostics
+        );
 
         [PreserveSig]
         Result GetPrecompiledTargetCode(
             Brutal.SlangApi.CompileTarget target,
-            out IBlob outCode,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outCode,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
 
         [PreserveSig]
@@ -611,8 +747,9 @@ namespace Brutal.SlangApi
         [PreserveSig]
         Result GetModuleDependency(
             Int dependencyIndex,
-            out Brutal.SlangApi.IModule outModule,
-            out IBlob outDiagnostics
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<Brutal.SlangApi.IModule>))]
+                out Brutal.SlangApi.IModule outModule,
+            [MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outDiagnostics
         );
     };
 
@@ -621,7 +758,7 @@ namespace Brutal.SlangApi
     public unsafe partial interface IByteCodeRunner
     {
         [PreserveSig]
-        Result LoadModule(IBlob moduleBlob);
+        Result LoadModule([MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] IBlob moduleBlob);
 
         [PreserveSig]
         Result SelectFunctionByIndex(uint functionIndex);
@@ -636,13 +773,13 @@ namespace Brutal.SlangApi
         void* GetCurrentWorkingSet();
 
         [PreserveSig]
-        Result Execute(void* argumentData, ByteSize64 argumentSize);
+        Result Execute(void* argumentData, [MarshalUsing(typeof(SlangSizeMarshaller))] ByteSize argumentSize);
 
         [PreserveSig]
-        void GetErrorString(out IBlob outBlob);
+        void GetErrorString([MarshalUsing(typeof(SlangInterfaceMarshaller<IBlob>))] out IBlob outBlob);
 
         [PreserveSig]
-        void* GetReturnValue(out ByteSize64 outValueSize);
+        void* GetReturnValue([MarshalUsing(typeof(SlangSizeMarshaller))] out ByteSize outValueSize);
 
         [PreserveSig]
         void SetExtInstHandlerUserData(void* userData);

@@ -122,17 +122,11 @@ public static unsafe class ICompileRequestExtensions
     /// <summary>
     ///     Returns the <see cref="ISlangWriter"/> currently installed for
     ///     <paramref name="channel"/>, or <c>null</c> if the channel is unset. Slang's
-    ///     getter does not AddRef the returned pointer, so this wrapper performs the
-    ///     AddRef itself before handing the pointer to <see cref="ComWrappers"/>.
+    ///     getter lends the pointer without an AddRef; the returned proxy takes its own
+    ///     reference, so release it with <see cref="Slang.Release"/>.
     /// </summary>
-    public static ISlangWriter? GetWriter(this ICompileRequest self, WriterChannel channel)
-    {
-        var raw = self.GetWriter(channel);
-        if (raw == 0)
-            return null;
-        Marshal.AddRef(raw);
-        return (ISlangWriter)Slang.ComWrappers.GetOrCreateObjectForComInstance(raw, CreateObjectFlags.None);
-    }
+    public static ISlangWriter? GetWriter(this ICompileRequest self, WriterChannel channel) =>
+        Slang.WrapBorrowedComInstance<ISlangWriter>(self.GetWriter(channel));
 
     /// <summary>
     ///     Adds a translation-unit source whose contents are provided as an

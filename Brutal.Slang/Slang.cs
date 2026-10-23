@@ -6,25 +6,25 @@ namespace Brutal.SlangApi;
 ///     The Slang class provides access to the slang library for compiling shaders.
 /// </summary>
 /// <remarks>
-///     Slang COM proxies (returned by <see cref="CreateGlobalSession(Int)"/>,
-///     <see cref="ISessionExtensions.LoadModule"/>, etc.) are released by the ComWrappers
-///     finalizer when GC reclaims the managed proxy. There is no deterministic
-///     <c>Dispose</c>. Callers don't need to do anything special. COM proxies in this
-///     binding represent shared-ownership references; the underlying slang object stays
-///     alive as long as anything (slang internals, other proxies, or the global session)
-///     holds a reference, regardless of when any single proxy is collected.
+///     Release returned COM proxies with <see cref="Release"/> on the thread using
+///     them, in reverse dependency order: code/diagnostics and components, modules,
+///     session, then global session. Keep parents alive until their children have
+///     been released. The garbage collector never releases a proxy, so one that is
+///     not passed to <see cref="Release"/> keeps its native object alive.
+///     Each returned proxy owns an independent reference; releasing one proxy does
+///     not invalidate another proxy for the same native object.
 /// </remarks>
 public static partial class Slang
 {
     /// <summary>
     ///     <see cref="ComWrappers"/> instance used to bridge raw COM pointers obtained from
     ///     <c>slang_*</c> entry points (e.g. <see cref="PInvoke.slang_createGlobalSession"/>)
-    ///     into managed <c>[GeneratedComInterface]</c> proxies. The default
-    ///     <see cref="StrategyBasedComWrappers"/> implementation discovers proxy classes
+    ///     into managed <c>[GeneratedComInterface]</c> proxies. <see cref="SlangComWrappers"/>
+    ///     keeps <see cref="StrategyBasedComWrappers"/>' discovery of the proxy classes
     ///     emitted by the source generator from the type's IID, so no per-interface
     ///     registration is needed.
     /// </summary>
-    internal static readonly StrategyBasedComWrappers ComWrappers = new();
+    internal static readonly StrategyBasedComWrappers ComWrappers = new SlangComWrappers();
 
     public static partial class PInvoke
     {
@@ -33,6 +33,15 @@ public static partial class Slang
             var assembly = typeof(Slang).Assembly;
 
             var nativeDll = NativeLibrary.Load("slang", assembly, DllImportSearchPath.AssemblyDirectory);
+
+            // Slang loads slang-glslang and slang-glsl-module by bare name at run time. Windows
+            // searches only the application and system directories for them, which misses a
+            // RID-less NuGet build's runtimes/win-x64/native folder, so load them from wherever
+            // slang came from; Slang's own LoadLibrary then finds the loaded modules. macOS and
+            // Linux resolve them through slang's rpath.
+            if (OperatingSystem.IsWindows())
+                foreach (var companion in (ReadOnlySpan<string>)["slang-glslang", "slang-glsl-module"])
+                    NativeLibrary.TryLoad(companion, assembly, DllImportSearchPath.AssemblyDirectory, out _);
 
             NativeLibrary.SetDllImportResolver(
                 assembly,
@@ -93,10 +102,10 @@ public static partial class Slang
     {
         nint raw;
         fixed (byte* p = data)
-            raw = PInvoke.slang_createBlob(p, (Brutal.ByteSize64)data.Length);
+            raw = PInvoke.slang_createBlob(p, Brutal.ByteSize.Of(data));
         if (raw == 0)
             throw new SlangException((Result)(-1), "slang_createBlob returned a null pointer.");
-        return (ISlangBlob)ComWrappers.GetOrCreateObjectForComInstance(raw, CreateObjectFlags.None);
+        return WrapComInstance<ISlangBlob>((Result)0, raw)!;
     }
 
     /// <summary>
@@ -151,9 +160,54 @@ public static partial class Slang
     internal static T? WrapComInstance<T>(Result hr, nint comInstance)
         where T : class
     {
-        if (hr.IsFailure || comInstance == 0)
+        if (comInstance == 0)
             return null;
-        return (T)ComWrappers.GetOrCreateObjectForComInstance(comInstance, CreateObjectFlags.None);
+        try
+        {
+            return hr.IsFailure ? null : WrapBorrowedComInstance<T>(comInstance);
+        }
+        finally
+        {
+            // The RCW retains its own reference. Consume the reference transferred by
+            // the native export, including when interface conversion throws.
+            Marshal.Release(comInstance);
+        }
+    }
+
+    internal static T? WrapBorrowedComInstance<T>(nint pointer)
+        where T : class
+    {
+        if (pointer == 0)
+            return null;
+        var wrapper = ComWrappers.GetOrCreateObjectForComInstance(pointer, CreateObjectFlags.UniqueInstance);
+        // Only Release frees a proxy's native references. Its finalizer would release them
+        // on the finalizer thread, in no order relative to the proxy's session.
+        GC.SuppressFinalize(wrapper);
+        try
+        {
+            return (T)wrapper;
+        }
+        catch
+        {
+            ((ComObject)wrapper).FinalRelease();
+            throw;
+        }
+    }
+
+    /// <summary>
+    ///     Releases a proxy returned by this binding immediately. This is the only way a
+    ///     proxy's native reference is released: the garbage collector never does it.
+    ///     Null and repeated releases are harmless. Do not use the proxy afterwards. Release children
+    ///     before their owning session and release sessions before their global session.
+    ///     Do not race release against another call using the same proxy.
+    /// </summary>
+    public static void Release(object? instance)
+    {
+        if (instance is null)
+            return;
+        if (instance is not ComObject wrapper)
+            throw new ArgumentException("Expected a Slang COM proxy.", nameof(instance));
+        wrapper.FinalRelease();
     }
 
     /// <summary>
@@ -163,6 +217,31 @@ public static partial class Slang
     ///     count. Call <see cref="Marshal.Release"/> on it when finished, or pass it to
     ///     APIs that take ownership.
     /// </summary>
-    public static nint GetComInstance(object comObject) =>
-        ComWrappers.GetOrCreateComInterfaceForObject(comObject, CreateComInterfaceFlags.None);
+    public static nint GetComInstance(object comObject)
+    {
+        ArgumentNullException.ThrowIfNull(comObject);
+        if (comObject is ComObject)
+            return GetComInstance<ISlangUnknown>((ISlangUnknown)comObject);
+        return System.Runtime.InteropServices.ComWrappers.TryGetComInstance(comObject, out var native)
+            ? native
+            : ComWrappers.GetOrCreateComInterfaceForObject(comObject, CreateComInterfaceFlags.None);
+    }
+
+    /// <summary>
+    ///     Gets an owned pointer to the requested native interface, including its correct
+    ///     subobject address. Release the returned reference after the native call.
+    /// </summary>
+    public static unsafe nint GetComInstance<T>(T comObject)
+        where T : class
+    {
+        if (comObject is ComObject wrapper)
+        {
+            var table = ((IUnmanagedVirtualMethodTableProvider)wrapper).GetVirtualMethodTableInfoForKey(typeof(T));
+            var pointer = (nint)table.ThisPointer;
+            Marshal.AddRef(pointer);
+            GC.KeepAlive(wrapper);
+            return pointer;
+        }
+        return (nint)ComInterfaceMarshaller<T>.ConvertToUnmanaged(comObject);
+    }
 }

@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Gltf
+Ahwoo.BRUTAL.Gltf
 
 This package contains no third-party library. Its glTF type definitions are generated
 from The Khronos Group's glTF 2.0 JSON schemas, and the descriptive text of those

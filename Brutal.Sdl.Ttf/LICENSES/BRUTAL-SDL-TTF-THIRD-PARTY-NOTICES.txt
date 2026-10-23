@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Sdl.Ttf
+Ahwoo.BRUTAL.Sdl.Ttf
 
 This package redistributes third-party software. The licenses governing that software
 are reproduced below in full.
@@ -42,12 +42,12 @@ FREETYPE IS DUAL-LICENSED, AND WE DISTRIBUTE UNDER THE FREETYPE LICENSE
       This software is based in part of the work of the FreeType Team.
 
   The year is 2023 because that is the year of FreeType 2.13.2, the version contained
-  here. RocketWerkz.Brutal.FreeType contains a different version and its credit
+  here. Ahwoo.BRUTAL.FreeType contains a different version and its credit
   states a different year; both are correct, and they must not be made to agree.
 
 A NOTE ON SCOPE
 
-  This package depends on RocketWerkz.Brutal.Sdl and links against SDL3 at runtime.
+  This package depends on Ahwoo.BRUTAL.Sdl and links against SDL3 at runtime.
   SDL3 is not contained in this package and is covered by that package's own notices.
 
   SDL_ttf can optionally be built against PlutoSVG and PlutoVG for colour-emoji

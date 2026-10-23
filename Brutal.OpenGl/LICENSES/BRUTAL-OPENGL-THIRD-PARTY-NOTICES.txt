@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.OpenGl
+Ahwoo.BRUTAL.OpenGl
 
 This package ships one third-party native library, glad, on win-x64, linux-x64 and
 osx-arm64. It contains no OpenGL implementation - glad resolves OpenGL entry points at

@@ -181,7 +181,7 @@ namespace Brutal.GltfApi {
         /// <summary>
         /// The alpha rendering mode of the material.
         /// </summary>
-        [System.Text.Json.Serialization.JsonConverterAttribute(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        [System.Text.Json.Serialization.JsonConverterAttribute(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<AlphaModeEnum>))]
         [System.Text.Json.Serialization.JsonPropertyNameAttribute("alphaMode")]
         public AlphaModeEnum AlphaMode {
             get {

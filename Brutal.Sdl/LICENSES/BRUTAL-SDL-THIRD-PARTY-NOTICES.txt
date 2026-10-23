@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Sdl
+Ahwoo.BRUTAL.Sdl
 
 This package redistributes third-party software. The licenses governing that software
 are reproduced below in full.

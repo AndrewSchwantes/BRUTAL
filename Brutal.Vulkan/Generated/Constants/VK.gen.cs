@@ -1077,5 +1077,156 @@ namespace Brutal.VulkanApi
         public const int STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_SPEC_VERSION =
             STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_API_VERSION_1_0_0;
         public const string STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_av1_encode";
+
+        /// <summary>
+        ///     <see href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_0.html">VK_API_VERSION_1_0</see> - Return API version number for Vulkan 1.0
+        /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         <c>VK_API_VERSION_1_0</c> returns the API version number for Vulkan 1.0.0.
+        ///     </para>
+        ///     <code>
+        ///         // Provided by VK_VERSION_1_0
+        ///         // Vulkan 1.0 version number
+        ///         #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
+        ///     </code>
+        /// </remarks>
+        public const int API_VERSION_1_0 = unchecked(
+            (int)((((uint)(0)) << 29) | (((uint)(1)) << 22) | (((uint)(0)) << 12) | ((uint)(0)))
+        );
+
+        /// <summary>
+        ///     <see href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_1.html">VK_API_VERSION_1_1</see> - Return API version number for Vulkan 1.1
+        /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         <c>VK_API_VERSION_1_1</c> returns the API version number for Vulkan 1.1.0.
+        ///     </para>
+        ///     <code>
+        ///         // Provided by VK_VERSION_1_1
+        ///         // Vulkan 1.1 version number
+        ///         #define VK_API_VERSION_1_1 VK_MAKE_API_VERSION(0, 1, 1, 0)// Patch version should always be set to 0
+        ///     </code>
+        /// </remarks>
+        public const int API_VERSION_1_1 = unchecked(
+            (int)((((uint)(0)) << 29) | (((uint)(1)) << 22) | (((uint)(1)) << 12) | ((uint)(0)))
+        );
+
+        /// <summary>
+        ///     <see href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_2.html">VK_API_VERSION_1_2</see> - Return API version number for Vulkan 1.2
+        /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         <c>VK_API_VERSION_1_2</c> returns the API version number for Vulkan 1.2.0.
+        ///     </para>
+        ///     <code>
+        ///         // Provided by VK_VERSION_1_2
+        ///         // Vulkan 1.2 version number
+        ///         #define VK_API_VERSION_1_2 VK_MAKE_API_VERSION(0, 1, 2, 0)// Patch version should always be set to 0
+        ///     </code>
+        /// </remarks>
+        public const int API_VERSION_1_2 = unchecked(
+            (int)((((uint)(0)) << 29) | (((uint)(1)) << 22) | (((uint)(2)) << 12) | ((uint)(0)))
+        );
+
+        /// <summary>
+        ///     <see href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_3.html">VK_API_VERSION_1_3</see> - Return API version number for Vulkan 1.3
+        /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         <c>VK_API_VERSION_1_3</c> returns the API version number for Vulkan 1.3.0.
+        ///     </para>
+        ///     <code>
+        ///         // Provided by VK_VERSION_1_3
+        ///         // Vulkan 1.3 version number
+        ///         #define VK_API_VERSION_1_3 VK_MAKE_API_VERSION(0, 1, 3, 0)// Patch version should always be set to 0
+        ///     </code>
+        /// </remarks>
+        public const int API_VERSION_1_3 = unchecked(
+            (int)((((uint)(0)) << 29) | (((uint)(1)) << 22) | (((uint)(3)) << 12) | ((uint)(0)))
+        );
+
+        /// <summary>
+        ///     <see href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_4.html">VK_API_VERSION_1_4</see> - Return API version number for Vulkan 1.4
+        /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         <c>VK_API_VERSION_1_4</c> returns the API version number for Vulkan 1.4.0.
+        ///     </para>
+        ///     <code>
+        ///         // Provided by VK_VERSION_1_4
+        ///         // Vulkan 1.4 version number
+        ///         #define VK_API_VERSION_1_4 VK_MAKE_API_VERSION(0, 1, 4, 0)// Patch version should always be set to 0
+        ///     </code>
+        /// </remarks>
+        public const int API_VERSION_1_4 = unchecked(
+            (int)((((uint)(0)) << 29) | (((uint)(1)) << 22) | (((uint)(4)) << 12) | ((uint)(0)))
+        );
+
+        /// <summary>
+        ///     <see href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION.html">VK_HEADER_VERSION</see> - Vulkan header file version number
+        /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         <c>VK_HEADER_VERSION</c> is the version number of the `{core_header}` header.
+        ///         This value is kept synchronized with the patch version of the released
+        ///         Specification.
+        ///     </para>
+        ///     <code>
+        ///         // Provided by VK_VERSION_1_0
+        ///         // Version of this file
+        ///         #define VK_HEADER_VERSION 357
+        ///     </code>
+        /// </remarks>
+        public const int HEADER_VERSION = 357;
+
+        /// <summary>
+        ///     <see href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION_COMPLETE.html">VK_HEADER_VERSION_COMPLETE</see> - Vulkan header file complete version number
+        /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         <c>VK_HEADER_VERSION_COMPLETE</c> is the complete version number of the
+        ///         `{core_header}` header, comprising the major, minor, and patch versions.
+        ///         The major/minor values are kept synchronized with the complete version of
+        ///         the released Specification.
+        ///         This value is intended for use by automated tools to identify exactly which
+        ///         version of the header was used during their generation.
+        ///     </para>
+        ///     <para>
+        ///         Applications should not use this value as their
+        ///         <c>VkApplicationInfo::apiVersion</c>.
+        ///         Instead applications should explicitly select a specific fixed major/minor
+        ///         API version using, for example, one of the <c>VK_API_VERSION_</c>*_* values.
+        ///     </para>
+        ///     <code>
+        ///         // Provided by VK_VERSION_1_0
+        ///         // Complete version of this file
+        ///         #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
+        ///     </code>
+        /// </remarks>
+        public const int HEADER_VERSION_COMPLETE = unchecked(
+            (int)((((uint)(0)) << 29) | (((uint)(1)) << 22) | (((uint)(4)) << 12) | ((uint)(VK.HEADER_VERSION)))
+        );
+        public const int STD_VULKAN_VIDEO_CODEC_H264_DECODE_API_VERSION_1_0_0 = unchecked(
+            (int)((((uint)(1)) << 22) | (((uint)(0)) << 12) | ((uint)(0)))
+        );
+        public const int STD_VULKAN_VIDEO_CODEC_H264_ENCODE_API_VERSION_1_0_0 = unchecked(
+            (int)((((uint)(1)) << 22) | (((uint)(0)) << 12) | ((uint)(0)))
+        );
+        public const int STD_VULKAN_VIDEO_CODEC_H265_DECODE_API_VERSION_1_0_0 = unchecked(
+            (int)((((uint)(1)) << 22) | (((uint)(0)) << 12) | ((uint)(0)))
+        );
+        public const int STD_VULKAN_VIDEO_CODEC_H265_ENCODE_API_VERSION_1_0_0 = unchecked(
+            (int)((((uint)(1)) << 22) | (((uint)(0)) << 12) | ((uint)(0)))
+        );
+        public const int STD_VULKAN_VIDEO_CODEC_VP9_DECODE_API_VERSION_1_0_0 = unchecked(
+            (int)((((uint)(1)) << 22) | (((uint)(0)) << 12) | ((uint)(0)))
+        );
+        public const int STD_VULKAN_VIDEO_CODEC_AV1_DECODE_API_VERSION_1_0_0 = unchecked(
+            (int)((((uint)(1)) << 22) | (((uint)(0)) << 12) | ((uint)(0)))
+        );
+        public const int STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_API_VERSION_1_0_0 = unchecked(
+            (int)((((uint)(1)) << 22) | (((uint)(0)) << 12) | ((uint)(0)))
+        );
     }
 }

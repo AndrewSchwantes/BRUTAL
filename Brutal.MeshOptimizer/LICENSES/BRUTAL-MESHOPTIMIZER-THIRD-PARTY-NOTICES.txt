@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.MeshOptimizer
+Ahwoo.BRUTAL.MeshOptimizer
 
 Brutal.MeshOptimizer redistributes one third-party component, meshoptimizer, as native
 libraries on every runtime identifier it supports. It is reproduced below with the

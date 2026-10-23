@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.FreeType
+Ahwoo.BRUTAL.FreeType
 
 This package redistributes the third-party components listed below, each reproduced
 with the license that governs it.
@@ -17,7 +17,7 @@ with the license that governs it.
   License for the library, and a separate X11-style license for each of the contributed
   BDF and PCF drivers, which are compiled into the shipped binaries.
 
-  zlib is not contained in this package. It is supplied by RocketWerkz.Brutal.ZLib,
+  zlib is not contained in this package. It is supplied by Ahwoo.BRUTAL.ZLib,
   on which this package depends, and is covered by that package's own notices.
 
   FreeType's own LICENSE.TXT distributes it "under two mutually exclusive open-source

@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.RakNet
+Ahwoo.BRUTAL.RakNet
 
 This package redistributes third-party software. Where terms attach to that software,
 the license governing it is reproduced below in full.

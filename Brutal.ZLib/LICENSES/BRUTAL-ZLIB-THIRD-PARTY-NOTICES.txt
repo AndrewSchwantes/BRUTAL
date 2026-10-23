@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.ZLib
+Ahwoo.BRUTAL.ZLib
 
 This package ships one third-party component, zlib, as native libraries and as its
 public C headers in source form. The license governing it is reproduced in full below.

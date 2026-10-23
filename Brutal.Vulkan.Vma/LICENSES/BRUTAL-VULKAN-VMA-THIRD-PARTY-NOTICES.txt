@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Vulkan.Vma
+Ahwoo.BRUTAL.Vulkan.Vma
 
 Brutal.Vulkan.Vma redistributes one third-party component, the Vulkan Memory Allocator. It
 reaches this package by two routes: as native libraries, and as descriptive text taken from

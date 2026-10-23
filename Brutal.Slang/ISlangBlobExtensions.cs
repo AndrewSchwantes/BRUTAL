@@ -9,9 +9,9 @@ public static unsafe partial class ISlangBlobExtensions
 {
     /// <summary>
     ///     Returns the blob's contents as a <see cref="ReadOnlySpan{Byte}"/>. The span is
-    ///     valid for the lifetime of the underlying blob. Copy if you need the bytes
-    ///     to outlive it.
+    ///     valid until the blob is passed to <see cref="Slang.Release"/>. Copy if you need
+    ///     the bytes to outlive it.
     /// </summary>
     public static ReadOnlySpan<byte> AsSpan(this ISlangBlob self) =>
-        new(self.GetBufferPointer(), checked((int)self.GetBufferSize()));
+        new(self.GetBufferPointer(), checked((int)self.GetBufferSize().Value));
 }

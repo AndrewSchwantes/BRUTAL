@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.Vulkan.Abstractions
+Ahwoo.BRUTAL.Vulkan.Abstractions
 
 Brutal.Vulkan.Abstractions builds on the Brutal.Vulkan bindings, which are generated from
 the Khronos Vulkan API registry. This package contains no native library and no generated

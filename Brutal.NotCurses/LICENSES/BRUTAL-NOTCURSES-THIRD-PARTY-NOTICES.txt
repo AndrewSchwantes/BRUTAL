@@ -1,5 +1,5 @@
 THIRD-PARTY LICENSE NOTICES
-RocketWerkz.Brutal.NotCurses
+Ahwoo.BRUTAL.NotCurses
 
 This package ships three third-party components on macOS and Linux and four on Windows: notcurses,
 plus the parts of its dependency closure that are not part of the operating system.
@@ -11,7 +11,7 @@ plus the parts of its dependency closure that are not part of the operating syst
   from the comments in those headers.
 
   zlib is not built or shipped by this package on any platform. It is supplied by the
-  RocketWerkz.Brutal.ZLib package, which this package depends on and whose own notices
+  Ahwoo.BRUTAL.ZLib package, which this package depends on and whose own notices
   file covers it. The terminfo database is read from the host and is not shipped.
 
   Upstream states a second license over one file that this package does not build. It

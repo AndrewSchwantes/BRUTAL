@@ -197,7 +197,7 @@ namespace Brutal.SlangApi
             Slang.PInvoke.spAddTranslationUnitSourceString(this, translationUnitIndex, path, source);
         }
 
-        public unsafe Result AddLibraryReference(RefString8 basePath, void* libData, ByteSize64 libDataSize)
+        public unsafe Result AddLibraryReference(RefString8 basePath, void* libData, ByteSize libDataSize)
         {
             return Slang.PInvoke.spAddLibraryReference(this, basePath, libData, libDataSize);
         }
@@ -305,7 +305,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spGetEntryPointSource(this, entryPointIndex);
         }
 
-        public unsafe void* GetEntryPointCode(int entryPointIndex, out ByteSize64 outSize)
+        public unsafe void* GetEntryPointCode(int entryPointIndex, out ByteSize outSize)
         {
             return Slang.PInvoke.spGetEntryPointCode(this, entryPointIndex, out outSize);
         }
@@ -330,7 +330,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spGetTargetHostCallable(this, targetIndex, out outSharedLibrary);
         }
 
-        public unsafe void* GetCompileRequestCode(out ByteSize64 outSize)
+        public unsafe void* GetCompileRequestCode(out ByteSize outSize)
         {
             return Slang.PInvoke.spGetCompileRequestCode(this, out outSize);
         }
@@ -340,7 +340,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spGetContainerCode(this, out outBlob);
         }
 
-        internal unsafe Result LoadRepro(nint fileSystem, void* data, ByteSize64 size)
+        internal unsafe Result LoadRepro(nint fileSystem, void* data, ByteSize size)
         {
             return Slang.PInvoke.spLoadRepro(this, fileSystem, data, size);
         }
@@ -494,7 +494,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionDecl_getParent(this);
         }
 
-        public Brutal.SlangApi.ReflectionModifier FindModifier(Brutal.SlangApi.ModifierID modifierID)
+        public ReflectionModifier FindModifier(Brutal.SlangApi.ModifierID modifierID)
         {
             return Slang.PInvoke.spReflectionDecl_findModifier(this, modifierID);
         }
@@ -513,12 +513,12 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionTypeLayout_getKind(this);
         }
 
-        public ByteSize64 GetSize(Brutal.SlangApi.ParameterCategory category)
+        public ByteSize GetSize(Brutal.SlangApi.ParameterCategory category)
         {
             return Slang.PInvoke.spReflectionTypeLayout_GetSize(this, category);
         }
 
-        public ByteSize64 GetStride(Brutal.SlangApi.ParameterCategory category)
+        public ByteSize GetStride(Brutal.SlangApi.ParameterCategory category)
         {
             return Slang.PInvoke.spReflectionTypeLayout_GetStride(this, category);
         }
@@ -548,7 +548,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionTypeLayout_GetExplicitCounter(this);
         }
 
-        public ByteSize64 GetElementStride(Brutal.SlangApi.ParameterCategory category)
+        public ByteSize GetElementStride(Brutal.SlangApi.ParameterCategory category)
         {
             return Slang.PInvoke.spReflectionTypeLayout_GetElementStride(this, category);
         }
@@ -817,12 +817,12 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionType_GetFieldByIndex(this, index);
         }
 
-        public ByteSize64 GetElementCount()
+        public ByteSize GetElementCount()
         {
             return Slang.PInvoke.spReflectionType_GetElementCount(this);
         }
 
-        public ByteSize64 GetSpecializedElementCount(Reflection reflection)
+        public ByteSize GetSpecializedElementCount(Reflection reflection)
         {
             return Slang.PInvoke.spReflectionType_GetSpecializedElementCount(this, reflection);
         }
@@ -901,12 +901,12 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionVariableLayout_GetTypeLayout(this);
         }
 
-        public ByteSize64 GetOffset(Brutal.SlangApi.ParameterCategory category)
+        public ByteSize GetOffset(Brutal.SlangApi.ParameterCategory category)
         {
             return Slang.PInvoke.spReflectionVariableLayout_GetOffset(this, category);
         }
 
-        public ByteSize64 GetSpace(Brutal.SlangApi.ParameterCategory category)
+        public ByteSize GetSpace(Brutal.SlangApi.ParameterCategory category)
         {
             return Slang.PInvoke.spReflectionVariableLayout_GetSpace(this, category);
         }
@@ -921,7 +921,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionVariableLayout_GetSemanticName(this);
         }
 
-        public ByteSize64 GetSemanticIndex()
+        public ByteSize GetSemanticIndex()
         {
             return Slang.PInvoke.spReflectionVariableLayout_GetSemanticIndex(this);
         }
@@ -950,7 +950,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionVariable_GetType(this);
         }
 
-        public Brutal.SlangApi.ReflectionModifier FindModifier(Brutal.SlangApi.ModifierID modifierID)
+        public ReflectionModifier FindModifier(Brutal.SlangApi.ModifierID modifierID)
         {
             return Slang.PInvoke.spReflectionVariable_FindModifier(this, modifierID);
         }
@@ -1009,7 +1009,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionFunction_GetName(this);
         }
 
-        public Brutal.SlangApi.ReflectionModifier FindModifier(Brutal.SlangApi.ModifierID modifierID)
+        public ReflectionModifier FindModifier(Brutal.SlangApi.ModifierID modifierID)
         {
             return Slang.PInvoke.spReflectionFunction_FindModifier(this, modifierID);
         }
@@ -1150,9 +1150,6 @@ namespace Brutal.SlangApi
     };
 
     [InteropHandle]
-    public readonly unsafe partial struct Attribute { };
-
-    [InteropHandle]
     public readonly unsafe partial struct ShaderReflection { };
 
     [InteropHandle]
@@ -1213,7 +1210,7 @@ namespace Brutal.SlangApi
     public unsafe partial struct SessionDesc
     {
         ///  The size of this structure, in bytes.
-        public ByteSize64 StructureSize;
+        public ByteSize StructureSize;
 
         ///  Code generation targets to include in the session.
         public Brutal.SlangApi.TargetDesc* Targets;
@@ -1272,7 +1269,7 @@ namespace Brutal.SlangApi
     public unsafe partial struct TargetDesc
     {
         ///  The size of this structure, in bytes.
-        public ByteSize64 StructureSize;
+        public ByteSize StructureSize;
 
         ///  The target format to generate code for (e.g., SPIR-V, DXIL, etc.)
         public Brutal.SlangApi.CompileTarget Format;
@@ -1336,7 +1333,7 @@ namespace Brutal.SlangApi
     public unsafe partial struct ByteCodeRunnerDesc
     {
         ///  The size of this structure, in bytes.
-        public ByteSize64 StructSize;
+        public ByteSize StructSize;
     };
 
     ///  A "Universally Unique Identifier" (UUID)
@@ -1355,8 +1352,6 @@ namespace Brutal.SlangApi
         public fixed byte Data4[8];
     };
 
-    public unsafe partial struct Guid { };
-
     ///  Can be requested from ISlangCastable cast to indicate the contained chars are null
     /// terminated.
     public unsafe partial struct TerminatedChars
@@ -1371,8 +1366,6 @@ namespace Brutal.SlangApi
 
     [InteropHandle]
     public readonly unsafe partial struct EntryPointLayout { };
-
-    public unsafe partial struct ReflectionModifier { };
 
     [InteropHandle]
     public readonly unsafe partial struct ReflectionUserAttribute
@@ -1402,7 +1395,7 @@ namespace Brutal.SlangApi
             return Slang.PInvoke.spReflectionUserAttribute_GetArgumentValueFloat(this, index, rs);
         }
 
-        public string GetArgumentValueString(uint index, out ByteSize64 outSize)
+        public string GetArgumentValueString(uint index, out ByteSize outSize)
         {
             return Slang.PInvoke.spReflectionUserAttribute_GetArgumentValueString(this, index, out outSize);
         }
