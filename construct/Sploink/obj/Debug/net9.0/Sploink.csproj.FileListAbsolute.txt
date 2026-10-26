@@ -1,0 +1,5 @@
+C:\repos\Sploink\construct\Sploink\obj\Debug\net9.0\Sploink.GeneratedMSBuildEditorConfig.editorconfig
+C:\repos\Sploink\construct\Sploink\obj\Debug\net9.0\Sploink.AssemblyInfoInputs.cache
+C:\repos\Sploink\construct\Sploink\obj\Debug\net9.0\Sploink.AssemblyInfo.cs
+C:\repos\Sploink\construct\Sploink\obj\Debug\net9.0\Sploink.csproj.CoreCompileInputs.cache
+C:\repos\Sploink\construct\Sploink\obj\Debug\net9.0\Sploink.sourcelink.json

@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "2NVLcD6VS2E=",
+  "success": true,
+  "projectFilePath": "C:\\repos\\Sploink\\construct\\Sploink\\Sploink.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\agsch\\.nuget\\packages\\ahwoo.brutal.collections\\2026.10.2\\ahwoo.brutal.collections.2026.10.2.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\ahwoo.brutal.core\\2026.10.4\\ahwoo.brutal.core.2026.10.4.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\ahwoo.brutal.glfw\\2026.10.5\\ahwoo.brutal.glfw.2026.10.5.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\ahwoo.brutal.glfw.native\\2026.10.5\\ahwoo.brutal.glfw.native.2026.10.5.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\ahwoo.brutal.logging\\2026.10.3\\ahwoo.brutal.logging.2026.10.3.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\ahwoo.brutal.memory\\2026.10.2\\ahwoo.brutal.memory.2026.10.2.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\ahwoo.brutal.numerics\\2026.10.2\\ahwoo.brutal.numerics.2026.10.2.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\ahwoo.brutal.strings\\2026.10.2\\ahwoo.brutal.strings.2026.10.2.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\communitytoolkit.highperformance\\8.4.2\\communitytoolkit.highperformance.8.4.2.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.0\\microsoft.extensions.configuration.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.0\\microsoft.extensions.configuration.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.configuration.binder\\10.0.0\\microsoft.extensions.configuration.binder.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\10.0.0\\microsoft.extensions.dependencyinjection.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0\\microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.logging\\10.0.0\\microsoft.extensions.logging.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.0\\microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.logging.configuration\\10.0.0\\microsoft.extensions.logging.configuration.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.logging.console\\10.0.0\\microsoft.extensions.logging.console.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.objectpool\\11.0.0-preview.5.26302.115\\microsoft.extensions.objectpool.11.0.0-preview.5.26302.115.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.options\\10.0.0\\microsoft.extensions.options.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\10.0.0\\microsoft.extensions.options.configurationextensions.10.0.0.nupkg.sha512",
+    "C:\\Users\\agsch\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.0\\microsoft.extensions.primitives.10.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
