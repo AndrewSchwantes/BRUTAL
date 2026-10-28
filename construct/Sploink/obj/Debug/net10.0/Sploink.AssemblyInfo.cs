@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sploink")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ac91e105e816361938b4250cbcedae239749ce2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+792c97a23e35e95893f55ae93329f54f85826cb1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sploink")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sploink")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
